@@ -492,18 +492,15 @@ export const value = 42;
 
 At this point, we can start setting up for git version control but first the instructor tells us to create a `.gitignore` at the top level and we can just copy everything from the same-named file inside the client directory. We can also clean up and remove the test files we created.
 
-- create .gitignore
-- copy values from client/.gitignore
-- create Github Repo (optional)
+### 5. Install Packages and Setup Install Script
 
-#### Install Packages and Setup Install Script
+run the following command to install all the packages that will be used:
 
 ```sh
 npm install bcryptjs@2.4.3 concurrently@8.0.1 cookie-parser@1.4.6 dayjs@1.11.7 dotenv@16.0.3 express@4.18.2 express-async-errors@3.1.1 express-validator@7.0.1 http-status-codes@2.2.0 jsonwebtoken@9.0.0 mongoose@7.0.5 morgan@1.10.0 multer@1.4.5-lts.1 nanoid@4.0.2 nodemon@2.0.22 cloudinary@1.37.3 dayjs@1.11.9 datauri@4.1.0 helmet@7.0.0 express-rate-limit@6.8.0 express-mongo-sanitize@2.2.0
-
 ```
 
-package.json
+Inside `package.json` add the following script, it will be used when deploying the project, to add all the packages needed:
 
 ```json
 "scripts": {
@@ -519,10 +516,11 @@ npm run setup-project
 
 #### Setup Basic Express
 
-- install express and nodemon.
-- setup a basic server which listening on PORT=5100
-- create a basic home route which sends back "hello world"
-- setup a script with nodemon package.
+For our server we want to install express and nodemon with the following command:
+
+```sh
+npm i express@4.18.2 nodemon@2.0.22
+```
 
 [Express Docs](https://expressjs.com/)
 
@@ -532,9 +530,7 @@ Express is a fast and minimalist web application framework for Node.js. It simpl
 
 Nodemon is a development tool that improves the developer experience. It monitors your Node.js application for any changes in the code and automatically restarts the server whenever a change is detected. This eliminates the need to manually restart the server after every code modification, making the development process more efficient and productive. Nodemon is commonly used during development to save time and avoid the hassle of manual server restarts.
 
-```sh
-npm i express@4.18.2 nodemon@2.0.22
-```
+We will be setting up a basic server that will be listening on PORT 5100. To see how express runs, we will also set up a basic home page with 'hello world' as an example.
 
 server.js
 
@@ -550,6 +546,8 @@ app.listen(5100, () => {
   console.log('server running....');
 });
 ```
+
+We'll also need to set up a script with nodemon package so that the server will run on command.
 
 package.json
 
