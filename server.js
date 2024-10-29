@@ -103,6 +103,17 @@ app.delete('/api/v1/jobs/:id', (req, res) => {
   res.status(200).json({ msg: 'job deleted' });
 });
 
+// Not Found middleware that should catch 404 for all routes non-existing routes
+app.use('*', (req, res) => {
+  res.status(404).json({ msg: 'not found' });
+});
+
+// Error middleware
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ msg: 'something went wrong' });
+});
+
 // Check for Production or Development port
 const port = process.env.PORT || 5100;
 

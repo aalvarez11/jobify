@@ -673,40 +673,7 @@ Next we want to write and execute the following:
 
 (NOTE: every time nodemon restarts, the job ids will be reset, hence the api url needs to be updated by getting all then copying one id, or hard code a job id. THIS APPLIES TO READ, UPDATE, AND DELETE ROUTES)
 
-```js
-// DELETE JOB
-
-app.delete('/api/v1/jobs/:id', (req, res) => {
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  const newJobs = jobs.filter((job) => job.id !== id);
-  jobs = newJobs;
-
-  res.status(200).json({ msg: 'job deleted' });
-});
-```
-
-#### Not Found Middleware
-
-```js
-app.use('*', (req, res) => {
-  res.status(404).json({ msg: 'not found' });
-});
-```
-
-#### Error Middleware
-
-```js
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ msg: 'something went wrong' });
-});
-```
-
-#### Not Found and Error Middleware
+#### C. Not Found and Error Middleware
 
 The "not found" middleware in Express.js is used when a request is made to a route that does not exist. It catches these requests and responds with a 404 status code, indicating that the requested resource was not found.
 
@@ -714,24 +681,16 @@ On the other hand, the "error" middleware in Express.js is used to handle any er
 
 In summary, the "not found" middleware is specifically designed to handle requests for non-existent routes, while the "error" middleware is a catch-all for handling unexpected errors that occur during request processing.
 
-- make a request to "/jobss"
-
 ```js
-// GET ALL JOBS
-app.get('/api/v1/jobs', (req, res) => {
-  // console.log(jobss);
-  res.status(200).json({ jobs });
+// not found middleware
+app.use('*', (req, res) => {
+  res.status(404).json({ msg: 'not found' });
 });
 
-// GET SINGLE JOB
-app.get('/api/v1/jobs/:id', (req, res) => {
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    throw new Error('no job with that id');
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  res.status(200).json({ job });
+// error middleware
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ msg: 'something went wrong' });
 });
 ```
 
