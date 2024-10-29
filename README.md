@@ -664,50 +664,16 @@ app.get('/api/v1/jobs', (req, res) => {
 
 #### B. Create, FindOne, Modify and Delete
 
+Next we want to write and execute the following:
+
+- Add a route for creating one job and test it with Thunder Client.
+- Add a route for retrieving a job by id from the database and test it with the Thunder Client.
+- Add a route for updating a job by id from the database and test it with the Thunder Client.
+- Add a route for deleting a job by id from the database and test it with the Thunder Client.
+
+(NOTE: every time nodemon restarts, the job ids will be reset, hence the api url needs to be updated by getting all then copying one id, or hard code a job id)
+
 ```js
-// CREATE JOB
-
-app.post('/api/v1/jobs', (req, res) => {
-  const { company, position } = req.body;
-  if (!company || !position) {
-    return res.status(400).json({ msg: 'please provide company and position' });
-  }
-  const id = nanoid(10);
-  // console.log(id);
-  const job = { id, company, position };
-  jobs.push(job);
-  res.status(200).json({ job });
-});
-
-// GET SINGLE JOB
-
-app.get('/api/v1/jobs/:id', (req, res) => {
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  res.status(200).json({ job });
-});
-
-// EDIT JOB
-
-app.patch('/api/v1/jobs/:id', (req, res) => {
-  const { company, position } = req.body;
-  if (!company || !position) {
-    return res.status(400).json({ msg: 'please provide company and position' });
-  }
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-
-  job.company = company;
-  job.position = position;
-  res.status(200).json({ msg: 'job modified', job });
-});
-
 // DELETE JOB
 
 app.delete('/api/v1/jobs/:id', (req, res) => {
