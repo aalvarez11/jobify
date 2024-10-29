@@ -662,7 +662,7 @@ app.get('/api/v1/jobs', (req, res) => {
 });
 ```
 
-#### Create, FindOne, Modify and Delete
+#### B. Create, FindOne, Modify and Delete
 
 ```js
 // CREATE JOB
