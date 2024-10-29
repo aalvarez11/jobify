@@ -694,106 +694,16 @@ app.use((err, req, res, next) => {
 });
 ```
 
-#### Controller and Router
+#### D. Controller and Router
 
-setup controllers and router
-
-controllers/jobController.js
-
-```js
-import { nanoid } from 'nanoid';
-
-let jobs = [
-  { id: nanoid(), company: 'apple', position: 'front-end developer' },
-  { id: nanoid(), company: 'google', position: 'back-end developer' },
-];
-
-export const getAllJobs = async (req, res) => {
-  res.status(200).json({ jobs });
-};
-
-export const createJob = async (req, res) => {
-  const { company, position } = req.body;
-
-  if (!company || !position) {
-    return res.status(400).json({ msg: 'please provide company and position' });
-  }
-  const id = nanoid(10);
-  const job = { id, company, position };
-  jobs.push(job);
-  res.status(200).json({ job });
-};
-
-export const getJob = async (req, res) => {
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    // throw new Error('no job with that id');
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  res.status(200).json({ job });
-};
-
-export const updateJob = async (req, res) => {
-  const { company, position } = req.body;
-  if (!company || !position) {
-    return res.status(400).json({ msg: 'please provide company and position' });
-  }
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-
-  job.company = company;
-  job.position = position;
-  res.status(200).json({ msg: 'job modified', job });
-};
-
-export const deleteJob = async (req, res) => {
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  const newJobs = jobs.filter((job) => job.id !== id);
-  jobs = newJobs;
-
-  res.status(200).json({ msg: 'job deleted' });
-};
-```
-
-routes/jobRouter.js
-
-```js
-import { Router } from 'express';
-const router = Router();
-
-import {
-  getAllJobs,
-  getJob,
-  createJob,
-  updateJob,
-  deleteJob,
-} from '../controllers/jobController.js';
-
-// router.get('/', getAllJobs);
-// router.post('/', createJob);
-
-router.route('/').get(getAllJobs).post(createJob);
-router.route('/:id').get(getJob).patch(updateJob).delete(deleteJob);
-
-export default router;
-```
-
-server.js
+To clean up `server.js`, we can separate the routes into their own files, a controller and a router. We move the jobs array and the functions to `jobController.js` and in `jobRouter.js` use an instance of an Express Router to match the routes to the corresponding requests. With that code separated `server.js` has all routing reduced to two easy lines of code:
 
 ```js
 import jobRouter from './routers/jobRouter.js';
 app.use('/api/v1/jobs', jobRouter);
 ```
 
-#### MongoDB
+#### E. MongoDB
 
 [MongoDb](https://www.mongodb.com/)
 
