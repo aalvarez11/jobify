@@ -671,7 +671,7 @@ Next we want to write and execute the following:
 - Add a route for updating a job by id from the database and test it with the Thunder Client.
 - Add a route for deleting a job by id from the database and test it with the Thunder Client.
 
-(NOTE: every time nodemon restarts, the job ids will be reset, hence the api url needs to be updated by getting all then copying one id, or hard code a job id)
+(NOTE: every time nodemon restarts, the job ids will be reset, hence the api url needs to be updated by getting all then copying one id, or hard code a job id. THIS APPLIES TO READ, UPDATE, AND DELETE ROUTES)
 
 ```js
 // DELETE JOB
