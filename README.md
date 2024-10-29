@@ -603,29 +603,11 @@ import morgan from 'morgan';
 app.use(morgan('dev'));
 ```
 
-After trying out morgan, we want to create a .env file and add .env to the .gitignore list so it doesn't get added to the git repo.
+After trying out morgan, we want to create a .env file and add .env to the .gitignore list so it doesn't get added to the git repo. Inside of the `.env` file we will add variables `PORT` and `NODE_ENV` because production will inject something else. Back in `server.js` we also import dotenv and add code to check the Node environment and add another check for the Port just for the visual helper.
 
-- create .env file in the root
-- add PORT and NODE_ENV
-- add .env to .gitignore
+### 10. New Features (optional)
 
-server.js
-
-```js
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
-
-const port = process.env.PORT || 5100;
-app.listen(port, () => {
-  console.log(`server running on PORT ${port}....`);
-});
-```
-
-#### New Features
+The instructor showcases some new Node features as of ver 6, however these will not be strictly used in this course:
 
 - fetch API
 - global await (top-level await)
@@ -651,13 +633,11 @@ package.json
   },
 ```
 
-#### Basic CRUD
+### 11. Basic CRUD
 
-- create jobs array where each item is an object with following properties
-  id, company, position
-- create routes to handle - create, read, update and delete functionalities
+In this project we will be using a jobs array where each item is an object with following properties: id, company, position. With all applications we want to be able to Create, Read, Update, and Delete items, so we will create routes to handle CRUD operations.
 
-#### Get All Jobs
+#### A. Get All Jobs
 
 [Nanoid](https://www.npmjs.com/package/nanoid)
 
