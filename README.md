@@ -514,7 +514,7 @@ Inside `package.json` add the following script, it will be used when deploying t
 npm run setup-project
 ```
 
-#### Setup Basic Express
+### 6. Setup Basic Express
 
 For our server we want to install express and nodemon with the following command:
 
@@ -557,19 +557,19 @@ package.json
   },
 ```
 
-#### Thunder Client
+### 7. Thunder Client
 
 Thunder Client is a popular Visual Studio Code extension that facilitates API testing and debugging. It provides a user-friendly interface for making HTTP requests and viewing the responses, allowing developers to easily test APIs, examine headers, and inspect JSON/XML payloads. Thunder Client offers features such as environment variables, request history, and the ability to save and organize requests for efficient development workflows.
 
 [Thunder Client](https://www.thunderclient.com/)
 
-- install and test home route
+dev note: installed Thunder Client extension by author of same name (Thunder Client) and tested GET request at `http://localhost:5100/`
 
-#### Accept JSON
+### 8. Setup Express Middleware to Accept JSON
 
-Setup express middleware to accept json
+To be able to accept JSON, Express needs an extra line of code seen at the top of the following, we also test it out:
 
-server
+server.js
 
 ```js
 app.use(express.json());
@@ -581,7 +581,7 @@ app.post('/', (req, res) => {
 });
 ```
 
-#### Morgan and Dotenv
+### 9. Morgan and Dotenv
 
 [Morgan](https://www.npmjs.com/package/morgan)
 
