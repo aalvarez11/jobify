@@ -595,11 +595,15 @@ Dotenv is a zero-dependency module that loads environment variables from a .env 
 npm i morgan@1.10.0 dotenv@16.0.3
 ```
 
+Since morgan is middleware, we have to import it into our server:
+
 ```js
 import morgan from 'morgan';
 
 app.use(morgan('dev'));
 ```
+
+After trying out morgan, we want to create a .env file and add .env to the .gitignore list so it doesn't get added to the git repo.
 
 - create .env file in the root
 - add PORT and NODE_ENV
