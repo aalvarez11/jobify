@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import { nanoid } from 'nanoid';
 import jobRouter from './routes/jobRouter.js';
 import mongoose from 'mongoose';
+import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
 // Enable dotenv
 dotenv.config();
@@ -39,10 +40,7 @@ app.use('*', (req, res) => {
 });
 
 // Error middleware
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ msg: 'something went wrong' });
-});
+app.use(errorHandlerMiddleware);
 
 // Check for Production or Development port
 const port = process.env.PORT || 5100;

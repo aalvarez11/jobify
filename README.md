@@ -781,65 +781,11 @@ Important: set up the import at the top of `server.js`!!!
 import 'express-async-errors';
 ```
 
-#### Get All Jobs
+#### J. Get All Jobs, Get Single Job, Delete Job, and Update Job
 
-jobController.js
+Continue rewriting the controller functionality to use the MongoDB database instead of the local array, test the requests using Thunder Client (still using Flashpost instead).
 
-```js
-export const getAllJobs = async (req, res) => {
-  const jobs = await Job.find({});
-  res.status(200).json({ jobs });
-};
-```
-
-#### Get Single Job
-
-```js
-export const getJob = async (req, res) => {
-  const { id } = req.params;
-  const job = await Job.findById(id);
-  if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  res.status(200).json({ job });
-};
-```
-
-#### Delete Job
-
-jobController.js
-
-```js
-export const deleteJob = async (req, res) => {
-  const { id } = req.params;
-  const removedJob = await Job.findByIdAndDelete(id);
-
-  if (!removedJob) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  res.status(200).json({ job: removedJob });
-};
-```
-
-#### Update Job
-
-```js
-export const updateJob = async (req, res) => {
-  const { id } = req.params;
-
-  const updatedJob = await Job.findByIdAndUpdate(id, req.body, {
-    new: true,
-  });
-
-  if (!updatedJob) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-
-  res.status(200).json({ job: updatedJob });
-};
-```
-
-#### Status Codes
+#### K. Status Codes Library
 
 A library for HTTP status codes is useful because it provides a comprehensive and standardized set of codes that represent the outcome of HTTP requests. It allows developers to easily understand and handle different scenarios during web development, such as successful responses, client or server errors, redirects, and more. By using a status code library, developers can ensure consistent and reliable communication between servers and clients, leading to better error handling and improved user experience.
 
@@ -847,49 +793,21 @@ A library for HTTP status codes is useful because it provides a comprehensive an
 
 ```sh
 npm i http-status-codes@2.2.0
-
 ```
 
-200 OK OK
-201 CREATED Created
+The following status codes are going to be used in the project, as per the instructor:
 
-400 BAD_REQUEST Bad Request
-401 UNAUTHORIZED Unauthorized
+- 200 OK OK
+- 201 CREATED Created
+- 400 BAD_REQUEST Bad Request
+- 401 UNAUTHORIZED Unauthorized
+- 403 FORBIDDEN Forbidden
+- 404 NOT_FOUND Not Found
+- 500 INTERNAL_SERVER_ERROR Internal Server Error
 
-403 FORBIDDEN Forbidden
-404 NOT_FOUND Not Found
+#### L. Custom Error Class
 
-500 INTERNAL_SERVER_ERROR Internal Server Error
-
-- refactor 200 response in all controllers
-
-jobController.js
-
-```js
-res.status(StatusCodes.OK).json({ jobs });
-```
-
-createJob
-
-```js
-res.status(StatusCodes.CREATED).json({ job });
-```
-
-#### Custom Error Class
-
-jobController
-
-```js
-export const getJob = async (req, res) => {
-  ....
-  if (!job) {
-    throw new Error('no job with that id');
-    // return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  ...
-};
-
-```
+We will be using a custom made error class to distinguish specific errors down the line. The following notes are preexisting from the instructor:
 
 errors/customErrors.js
 
@@ -920,32 +838,15 @@ this.statusCode = 404: This line sets the statusCode property of the NotFoundErr
 
 By creating a custom error class like NotFoundError, you can provide more specific error messages and properties to help with debugging and error handling in your application.
 
-#### Custom Error
+#### M. Implementing a Custom Error
 
-jobController.js
+Inside of `jobController.js` we can import our new class and change the logic for missing resources as below:
 
 ```js
-import { NotFoundError } from '../customErrors.js';
-
 if (!job) throw new NotFoundError(`no job with id : ${id}`);
 ```
 
-middleware/errorHandlerMiddleware.js
-
-```js
-import { StatusCodes } from 'http-status-codes';
-const errorHandlerMiddleware = (err, req, res, next) => {
-  console.log(err);
-  const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-  const msg = err.message || 'Something went wrong, try again later';
-
-  res.status(statusCode).json({ msg });
-};
-
-export default errorHandlerMiddleware;
-```
-
-server.js
+We also move the middleware code from the server file into it's own file and directory; `middleware/errorHandlerMiddleware.js`. After separating the code, remember to import the code back into `server.js`:
 
 ```js
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
@@ -958,7 +859,6 @@ app.use(errorHandlerMiddleware);
 400 BAD_REQUEST Bad Request
 401 UNAUTHORIZED Unauthorized
 403 FORBIDDEN Forbidden
-404 NOT_FOUND Not Found
 
 customErrors.js
 
