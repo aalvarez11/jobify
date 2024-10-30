@@ -763,23 +763,9 @@ export const createJob = async (req, res) => {
 };
 ```
 
-#### Try / Catch
+#### I. Try / Catch & express-async-errors
 
-jobController.js
-
-```js
-export const createJob = async (req, res) => {
-  const { company, position } = req.body;
-  try {
-    const job = await Job.create('something');
-    res.status(201).json({ job });
-  } catch (error) {
-    res.status(500).json({ msg: 'server error' });
-  }
-};
-```
-
-#### express-async-errors
+We also add a try-catch block for createJob as there is a possibility of async errors that fall outside the current constraints. Adding a try-catch is one way to handle these errors, but we could also use a package to handle these...
 
 The "express-async-errors" package is an Express.js middleware that helps handle errors that occur within asynchronous functions. It catches unhandled errors inside async/await functions and forwards them to Express.js's error handling middleware, preventing the Node.js process from crashing. It simplifies error handling in Express.js applications by allowing you to write asynchronous code without worrying about manually catching and forwarding errors.
 
@@ -789,23 +775,10 @@ The "express-async-errors" package is an Express.js middleware that helps handle
 npm i express-async-errors@3.1.1
 ```
 
-- setup import at the top !!!
-
-  server.js
+Important: set up the import at the top of `server.js`!!!
 
 ```js
 import 'express-async-errors';
-```
-
-jobController.js
-
-```js
-export const createJob = async (req, res) => {
-  const { company, position } = req.body;
-
-  const job = await Job.create({ company, position });
-  res.status(201).json({ job });
-};
 ```
 
 #### Get All Jobs
