@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 import { nanoid } from 'nanoid';
 import jobRouter from './routes/jobRouter.js';
+import mongoose from 'mongoose';
 
 // Enable dotenv
 dotenv.config();
@@ -45,7 +46,13 @@ app.use((err, req, res, next) => {
 // Check for Production or Development port
 const port = process.env.PORT || 5100;
 
-// Log a message while the server is running
-app.listen(port, () => {
-  console.log(`server running on PORT ${port}...`);
-});
+try {
+  await mongoose.connect(process.env.MONGO_URL);
+  // Log a message while the server is running
+  app.listen(port, () => {
+    console.log(`server running on PORT ${port}...`);
+  });
+} catch (error) {
+  console.log(error);
+  process.exit(1);
+}

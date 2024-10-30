@@ -703,13 +703,19 @@ import jobRouter from './routers/jobRouter.js';
 app.use('/api/v1/jobs', jobRouter);
 ```
 
-#### E. MongoDB
+#### E. MongoDB and Atlas
 
 [MongoDb](https://www.mongodb.com/)
 
 MongoDB is a popular NoSQL database that provides a flexible and scalable approach to storing and retrieving data. It uses a document-oriented model, where data is organized into collections of JSON-like documents. MongoDB offers high performance, horizontal scalability, and easy integration with modern development frameworks, making it suitable for handling diverse data types and handling large-scale applications.
 
 MongoDB Atlas is a fully managed cloud database service provided by MongoDB, offering automated deployment, scaling, and monitoring of MongoDB clusters, allowing developers to focus on building their applications without worrying about infrastructure management.
+
+Create a MongoDB Atlas account and set up a free server with criteria:
+
+- create database user & password for authentication type
+- connect from 'local environment' and whitelist IP '0.0.0.0'
+- connection as 'drivers' -> Node.js w/ version '5.5 or later'
 
 #### Mongoosejs
 
