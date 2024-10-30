@@ -717,7 +717,7 @@ Create a MongoDB Atlas account and set up a free server with criteria:
 - connect from 'local environment' and whitelist IP '0.0.0.0'
 - connection as 'drivers' -> Node.js w/ version '5.5 or later'
 
-#### Mongoosejs
+#### F. Mongoosejs
 
 [Mongoose](https://mongoosejs.com/)
 
@@ -743,43 +743,15 @@ try {
 }
 ```
 
-#### Job Model
+#### G. Job Model
 
-models/JobModel.js
+We create a new models directory and begin a `JobModel.js` file as the first model. We define a mongoose schema and define job properties. In the properties, we even use enums, according to the instructor "enum is a data type represents a field with a predefined set of values."
 
-enum - data type represents a field with a predefined set of values
+#### H. Create Job
 
-```js
-import mongoose from 'mongoose';
+Going back into `jobController.js`, we rewrite createJob's code using the job model we just made.
 
-const JobSchema = new mongoose.Schema(
-  {
-    company: String,
-    position: String,
-    jobStatus: {
-      type: String,
-      enum: ['interview', 'declined', 'pending'],
-      default: 'pending',
-    },
-    jobType: {
-      type: String,
-      enum: ['full-time', 'part-time', 'internship'],
-      default: 'full-time',
-    },
-    jobLocation: {
-      type: String,
-      default: 'my city',
-    },
-  },
-  { timestamps: true }
-);
-
-export default mongoose.model('Job', JobSchema);
-```
-
-#### Create Job
-
-jobController.js
+Dev note: fun fact, the Thunder Client version as of this moment no longer allows off-client/MongoDB API testing and returns the following: "Businesses are prohibited from using the free version, as it constitutes a violation of the terms." Following some reddit posts, I will be using VSCode extension Flashpost by Subas Raj instead.
 
 ```js
 import Job from '../models/JobModel.js';
