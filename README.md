@@ -924,21 +924,9 @@ Since we know the validation middleware works, we remove the test route and test
 }
 ```
 
-#### Validate ID Parameter
+#### S. Validate ID Parameter
 
-validationMiddleware.js
-
-```js
-import mongoose from 'mongoose';
-
-import { param } from 'express-validator';
-
-export const validateIdParam = withValidationErrors([
-  param('id')
-    .custom((value) => mongoose.Types.ObjectId.isValid(value))
-    .withMessage('invalid MongoDB id'),
-]);
-```
+For our other routes, we use the ID parameter, so we need some validation for these ID inputs as well.
 
 ```js
 export const validateIdParam = withValidationErrors([
