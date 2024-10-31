@@ -910,36 +910,9 @@ Depending on the amount of validation checks used, the code can get bloated, so 
 
 For more abstraction, we separate create a new utilities directory and a constants file at `utils/constants.js`. Then we can import the new objects into our job model.
 
-#### Validate Create Job
+#### R. Validate Create Job
 
-validationMiddleware.js
-
-```js
-import { JOB_STATUS, JOB_TYPE } from '../utils/constants.js';
-
-export const validateJobInput = withValidationErrors([
-  body('company').notEmpty().withMessage('company is required'),
-  body('position').notEmpty().withMessage('position is required'),
-  body('jobLocation').notEmpty().withMessage('job location is required'),
-  body('jobStatus')
-    .isIn(Object.values(JOB_STATUS))
-    .withMessage('invalid status value'),
-  body('jobType').isIn(Object.values(JOB_TYPE)).withMessage('invalid job type'),
-]);
-```
-
-```js
-import { validateJobInput } from '../middleware/validationMiddleware.js';
-
-router.route('/').get(getAllJobs).post(validateJobInput, createJob);
-router
-  .route('/:id')
-  .get(getJob)
-  .patch(validateJobInput, updateJob)
-  .delete(deleteJob);
-```
-
-- create job request
+Since we know the validation middleware works, we remove the test route and test validation and begin writing validation for Jobs. We can test our new validation using the request body provided by the instructor below (test Create route specifically):
 
 ```json
 {
