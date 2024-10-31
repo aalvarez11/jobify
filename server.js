@@ -2,8 +2,9 @@ import 'express-async-errors';
 import express from 'express';
 import morgan from 'morgan';
 import * as dotenv from 'dotenv';
-import jobRouter from './routes/jobRouter.js';
 import mongoose from 'mongoose';
+import jobRouter from './routes/jobRouter.js';
+import authRouter from './routes/authRouter.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
 // Enable dotenv
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 
 // routers
 app.use('/api/v1/jobs', jobRouter);
+app.use('/api/v1/auth', authRouter);
 
 // Not Found middleware that should catch 404 for all routes non-existing routes
 app.use('*', (req, res) => {
