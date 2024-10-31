@@ -906,60 +906,9 @@ app.post(
 
 Depending on the amount of validation checks used, the code can get bloated, so the instructor recommends more middleware to separate the logic.
 
-#### Remove Test Case From Server
+#### Q. Setup Constants
 
-#### Setup Constants
-
-utils/constants.js
-
-```js
-export const JOB_STATUS = {
-  PENDING: 'pending',
-  INTERVIEW: 'interview',
-  DECLINED: 'declined',
-};
-
-export const JOB_TYPE = {
-  FULL_TIME: 'full-time',
-  PART_TIME: 'part-time',
-  INTERNSHIP: 'internship',
-};
-
-export const JOB_SORT_BY = {
-  NEWEST_FIRST: 'newest',
-  OLDEST_FIRST: 'oldest',
-  ASCENDING: 'a-z',
-  DESCENDING: 'z-a',
-};
-```
-
-models/JobModel.js
-
-```js
-import mongoose from 'mongoose';
-import { JOB_STATUS, JOB_TYPE } from '../utils/constants';
-const JobSchema = new mongoose.Schema(
-  {
-    company: String,
-    position: String,
-    jobStatus: {
-      type: String,
-      enum: Object.values(JOB_STATUS),
-      default: JOB_STATUS.PENDING,
-    },
-    jobType: {
-      type: String,
-      enum: Object.values(JOB_TYPE),
-      default: JOB_TYPE.FULL_TIME,
-    },
-    jobLocation: {
-      type: String,
-      default: 'my city',
-    },
-  },
-  { timestamps: true }
-);
-```
+For more abstraction, we separate create a new utilities directory and a constants file at `utils/constants.js`. Then we can import the new objects into our job model.
 
 #### Validate Create Job
 
