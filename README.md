@@ -100,8 +100,6 @@ npm install @tanstack/react-query@4.29.5 @tanstack/react-query-devtools@4.29.6 a
 
 Dev note: NPM reported a high severity vulnerability in Axios. A fix was available so I ran `npm audit fix` to resolve it. Noting in case something happens with Axios down the line.
 
-=============================================================
-
 ### 5. Router
 
 In this lesson [React Router](https://reactrouter.com/en/main) is used, as of version 6.4 major improvements were madek, so it is recommended to use this version or later by the instructor. In 6.4+, pages are treated as independent entities so there is less need for a global state.
@@ -854,39 +852,17 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 app.use(errorHandlerMiddleware);
 ```
 
-#### Bad Request Error
+#### N. Bad Request, Unauthenticated, and Unauthorized Errors
 
-400 BAD_REQUEST Bad Request
-401 UNAUTHORIZED Unauthorized
-403 FORBIDDEN Forbidden
+Continuing with custom errors, we want to get the following ready as well:
 
-customErrors.js
+- 400 BAD_REQUEST Bad Request
+- 401 UNAUTHORIZED Unauthorized
+- 403 FORBIDDEN Forbidden
 
-```js
-export class BadRequestError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'BadRequestError';
-    this.statusCode = StatusCodes.BAD_REQUEST;
-  }
-}
-export class UnauthenticatedError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'UnauthenticatedError';
-    this.statusCode = StatusCodes.UNAUTHORIZED;
-  }
-}
-export class UnauthorizedError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'UnauthorizedError';
-    this.statusCode = StatusCodes.FORBIDDEN;
-  }
-}
-```
+#### O. Validation Layer & Express Validator
 
-#### Validation Layer
+We want to have a validation layer, because we want our controller to be as slim as possible and not bloat it with logic that could go in another module.
 
 [Express Validator](https://express-validator.github.io/docs/)
 
@@ -894,9 +870,7 @@ export class UnauthorizedError extends Error {
 npm i express-validator@7.0.1
 ```
 
-#### Test Route
-
-server.js
+The instructor creates a test route to showcase that it is possible to have a valid request in code, that we don't want to pass. He writes the following code in `server.js` and shows us in Thunder Client that having no name in the request body still gives a 200 response and a message of "hello " but we want a missing request body to return with response 404:
 
 ```js
 app.post('/api/v1/test', (req, res) => {
@@ -905,7 +879,7 @@ app.post('/api/v1/test', (req, res) => {
 });
 ```
 
-#### Express Validator
+Now we can use express validator to create a validation check in our test to make sure the name is nonempty:
 
 ```js
 import { body, validationResult } from 'express-validator';
@@ -928,36 +902,9 @@ app.post(
 );
 ```
 
-#### Validation Middleware
+#### P. Validation Middleware
 
-middleware/validationMiddleware.js
-
-```js
-import { body, validationResult } from 'express-validator';
-import { BadRequestError } from '../errors/customErrors';
-const withValidationErrors = (validateValues) => {
-  return [
-    validateValues,
-    (req, res, next) => {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        const errorMessages = errors.array().map((error) => error.msg);
-        throw new BadRequestError(errorMessages);
-      }
-      next();
-    },
-  ];
-};
-
-export const validateTest = withValidationErrors([
-  body('name')
-    .notEmpty()
-    .withMessage('name is required')
-    .isLength({ min: 3, max: 50 })
-    .withMessage('name must be between 3 and 50 characters long')
-    .trim(),
-]);
-```
+Depending on the amount of validation checks used, the code can get bloated, so the instructor recommends more middleware to separate the logic.
 
 #### Remove Test Case From Server
 
