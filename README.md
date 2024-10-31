@@ -933,34 +933,9 @@ After adding validation for cases of 'id not found' we can remove the checks fro
 
 At this stage it we are advised by the instructor to wipe the database to restart from scratch; He shows us how to drop a database over on MongoDB Atlas. Next, we start with the second model of project: Users.
 
-models/UserModel.js
+#### U. User Controller and Router
 
-```js
-import mongoose from 'mongoose';
-
-const UserSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
-  lastName: {
-    type: String,
-    default: 'lastName',
-  },
-  location: {
-    type: String,
-    default: 'my city',
-  },
-  role: {
-    type: String,
-    enum: ['user', 'admin'],
-    default: 'user',
-  },
-});
-
-export default mongoose.model('User', UserSchema);
-```
-
-#### User Controller and Router
+Now that we'll users have a model, we need a way to interact with them by creating and logging them in. We start by creating the structure and basic functionality for a controller and a router:
 
 controllers/authController.js
 
@@ -994,21 +969,9 @@ import authRouter from './routers/authRouter.js';
 app.use('/api/v1/auth', authRouter);
 ```
 
-#### Create User - Initial Setup
+#### V. Create User - Initial Setup
 
-authController.js
-
-```js
-import { StatusCodes } from 'http-status-codes';
-import User from '../models/UserModel.js';
-
-export const register = async (req, res) => {
-  const user = await User.create(req.body);
-  res.status(StatusCodes.CREATED).json({ user });
-};
-```
-
-- register user request
+Now we edit `authController.js` to actually create a user based on the schema then persist it on the database. We are also given user json to send as the request body on Thunder Client (or Flashpost):
 
 ```json
 {
