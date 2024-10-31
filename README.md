@@ -927,48 +927,11 @@ Since we know the validation middleware works, we remove the test route and test
 #### S. Validate ID Parameter
 
 For our other routes, we use the ID parameter, so we need some validation for these ID inputs as well.
+After adding validation for cases of 'id not found' we can remove the checks from the controllers and make those leaner.
 
-```js
-export const validateIdParam = withValidationErrors([
-  param('id').custom(async (value) => {
-    const isValidId = mongoose.Types.ObjectId.isValid(value);
-    if (!isValidId) throw new BadRequestError('invalid MongoDB id');
-    const job = await Job.findById(value);
-    if (!job) throw new NotFoundError(`no job with id : ${value}`);
-  }),
-]);
-```
+#### T. The User Model
 
-```js
-import { body, param, validationResult } from 'express-validator';
-import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
-import { JOB_STATUS, JOB_TYPE } from '../utils/constants.js';
-import mongoose from 'mongoose';
-import Job from '../models/JobModel.js';
-
-const withValidationErrors = (validateValues) => {
-  return [
-    validateValues,
-    (req, res, next) => {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        const errorMessages = errors.array().map((error) => error.msg);
-        if (errorMessages[0].startsWith('no job')) {
-          throw new NotFoundError(errorMessages);
-        }
-        throw new BadRequestError(errorMessages);
-      }
-      next();
-    },
-  ];
-};
-```
-
-- remove NotFoundError from getJob, updateJob, deleteJob controllers
-
-#### Clean DB
-
-#### User Model
+At this stage it we are advised by the instructor to wipe the database to restart from scratch; He shows us how to drop a database over on MongoDB Atlas. Next, we start with the second model of project: Users.
 
 models/UserModel.js
 
