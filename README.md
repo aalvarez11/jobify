@@ -989,7 +989,7 @@ At the moment, there is no validation for users, so anything can be put in the r
 
 #### X. Admin Role
 
-authController.js
+The instructor gives us a short rundown about the admin role and creates a simple case where the first user of the site is automatically an admin. Here is the snippet in `authController.js`:
 
 ```js
 // first registered user is an admin
@@ -999,36 +999,21 @@ req.body.role = isFirstAccount ? 'admin' : 'user';
 const user = await User.create(req.body);
 ```
 
-#### Hash Passwords
+#### Y. Hash Passwords
 
-[bcryptjs](https://www.npmjs.com/package/bcryptjs)
+We never ever should keep passwords as raw strings on databases. It's a huge security concern and we should always hash passwords before they are stored. We'll be using [bcryptjs](https://www.npmjs.com/package/bcryptjs) to encrypt passwords for users in our project.
 
 ```sh
 npm i bcryptjs@2.4.3
 
 ```
 
-authController.js
-
-```js
-import bcrypt from 'bcryptjs';
-
-const register = async (req, res) => {
-  // a random value that is added to the password before hashing
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
-  req.body.password = hashedPassword;
-
-  const user = await User.create(req.body);
-};
-```
-
-const salt = await bcrypt.genSalt(10);
+`const salt = await bcrypt.genSalt(10);`
 This line generates a random "salt" value that will be used to hash the password. A salt is a random value that is added to the password before hashing, which helps to make the resulting hash more resistant to attacks like dictionary attacks and rainbow table attacks. The genSalt() function in bcrypt generates a random salt value using a specified "cost" value. The cost value determines how much CPU time is needed to calculate the hash, and higher cost values result in stronger hashes that are more resistant to attacks.
 
 In this example, a cost value of 10 is used to generate the salt. This is a good default value that provides a good balance between security and performance. However, you may need to adjust the cost value based on the specific needs of your application.
 
-const hashedPassword = await bcrypt.hash(password, salt);
+`const hashedPassword = await bcrypt.hash(password, salt);`
 This line uses the generated salt value to hash the password. The hash() function in bcrypt takes two arguments: the password to be hashed, and the salt value to use for the hash. It then calculates the hash value using a one-way hash function and the specified salt value.
 
 The resulting hash value is a string that represents the hashed password. This string can then be stored in a database or other storage mechanism to be compared against the user's password when they log in.
