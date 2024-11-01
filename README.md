@@ -1297,21 +1297,9 @@ export const validateIdParam = withValidationErrors([
 ]);
 ```
 
-#### Logout User
+### 33. Logout User Functionality
 
-controllers/authController.js
-
-```js
-const logout = (req, res) => {
-  res.cookie('token', 'logout', {
-    httpOnly: true,
-    expires: new Date(Date.now()),
-  });
-  res.status(StatusCodes.OK).json({ msg: 'user logged out!' });
-};
-```
-
-routes/authRouter.js
+Since users can log in, we also want them to be able to log out. We add a new logout function to `controllers/authController.js` that expires the token immediately. We also need to add the route to `routes/authRouter.js`:
 
 ```js
 import { Router } from 'express';
@@ -1322,6 +1310,8 @@ router.get('/logout', logout);
 
 export default router;
 ```
+
+note: no middleware needed (yet?)
 
 #### User Routes
 
