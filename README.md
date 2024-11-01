@@ -1365,35 +1365,9 @@ app.use('/api/v1/users', authenticateUser, userRouter);
 
 We add the functionality to getCurrentUser, however, when we test it we can see the password hash in the response. Even seeing a hash is a major security issue, so we go back into the user model and add functionality to hide the password.
 
-#### Update User
+#### B. Update User
 
-middleware/validationMiddleware.js
-
-```js
-const validateUpdateUserInput = withValidationErrors([
-  body('name').notEmpty().withMessage('name is required'),
-  body('email')
-    .notEmpty()
-    .withMessage('email is required')
-    .isEmail()
-    .withMessage('invalid email format')
-    .custom(async (email, { req }) => {
-      const user = await User.findOne({ email });
-      if (user && user._id.toString() !== req.user.userId) {
-        throw new Error('email already exists');
-      }
-    }),
-  body('lastName').notEmpty().withMessage('last name is required'),
-  body('location').notEmpty().withMessage('location is required'),
-]);
-```
-
-```js
-export const updateUser = async (req, res) => {
-  const updatedUser = await User.findByIdAndUpdate(req.user.userId, req.body);
-  res.status(StatusCodes.OK).json({ msg: 'user updated' });
-};
-```
+For updating our user, we need a validation function to ensure the request has the necessary data. We're given sample JSON to import into our Thunder Client request easily:
 
 ```json
 {
@@ -1404,7 +1378,7 @@ export const updateUser = async (req, res) => {
 }
 ```
 
-#### Application Stats
+#### C. Application Stats
 
 ```js
 export const getApplicationStats = async (req, res) => {
