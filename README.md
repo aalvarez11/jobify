@@ -671,7 +671,7 @@ Next we want to write and execute the following:
 
 (NOTE: every time nodemon restarts, the job ids will be reset, hence the api url needs to be updated by getting all then copying one id, or hard code a job id. THIS APPLIES TO READ, UPDATE, AND DELETE ROUTES)
 
-#### C. Not Found and Error Middleware
+### 12. Not Found and Error Middleware
 
 The "not found" middleware in Express.js is used when a request is made to a route that does not exist. It catches these requests and responds with a 404 status code, indicating that the requested resource was not found.
 
@@ -692,7 +692,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-#### D. Controller and Router
+### 13. Controller and Router
 
 To clean up `server.js`, we can separate the routes into their own files, a controller and a router. We move the jobs array and the functions to `jobController.js` and in `jobRouter.js` use an instance of an Express Router to match the routes to the corresponding requests. With that code separated `server.js` has all routing reduced to two easy lines of code:
 
@@ -701,7 +701,7 @@ import jobRouter from './routers/jobRouter.js';
 app.use('/api/v1/jobs', jobRouter);
 ```
 
-#### E. MongoDB and Atlas
+### 14. MongoDB and Atlas
 
 [MongoDb](https://www.mongodb.com/)
 
@@ -715,7 +715,7 @@ Create a MongoDB Atlas account and set up a free server with criteria:
 - connect from 'local environment' and whitelist IP '0.0.0.0'
 - connection as 'drivers' -> Node.js w/ version '5.5 or later'
 
-#### F. Mongoosejs
+#### A. Mongoosejs
 
 [Mongoose](https://mongoosejs.com/)
 
@@ -741,11 +741,11 @@ try {
 }
 ```
 
-#### G. Job Model
+### 15. Job Model
 
 We create a new models directory and begin a `JobModel.js` file as the first model. We define a mongoose schema and define job properties. In the properties, we even use enums, according to the instructor "enum is a data type represents a field with a predefined set of values."
 
-#### H. Create Job
+#### A. Create Job
 
 Going back into `jobController.js`, we rewrite createJob's code using the job model we just made.
 
@@ -761,7 +761,7 @@ export const createJob = async (req, res) => {
 };
 ```
 
-#### I. Try / Catch & express-async-errors
+#### B. Try / Catch & express-async-errors
 
 We also add a try-catch block for createJob as there is a possibility of async errors that fall outside the current constraints. Adding a try-catch is one way to handle these errors, but we could also use a package to handle these...
 
@@ -779,11 +779,11 @@ Important: set up the import at the top of `server.js`!!!
 import 'express-async-errors';
 ```
 
-#### J. Get All Jobs, Get Single Job, Delete Job, and Update Job
+#### C. Get All Jobs, Get Single Job, Delete Job, and Update Job
 
 Continue rewriting the controller functionality to use the MongoDB database instead of the local array, test the requests using Thunder Client (still using Flashpost instead).
 
-#### K. Status Codes Library
+### 16. Status Codes Library
 
 A library for HTTP status codes is useful because it provides a comprehensive and standardized set of codes that represent the outcome of HTTP requests. It allows developers to easily understand and handle different scenarios during web development, such as successful responses, client or server errors, redirects, and more. By using a status code library, developers can ensure consistent and reliable communication between servers and clients, leading to better error handling and improved user experience.
 
@@ -803,7 +803,7 @@ The following status codes are going to be used in the project, as per the instr
 - 404 NOT_FOUND Not Found
 - 500 INTERNAL_SERVER_ERROR Internal Server Error
 
-#### L. Custom Error Class
+### 17. Custom Error Class
 
 We will be using a custom made error class to distinguish specific errors down the line. The following notes are preexisting from the instructor:
 
@@ -836,7 +836,7 @@ this.statusCode = 404: This line sets the statusCode property of the NotFoundErr
 
 By creating a custom error class like NotFoundError, you can provide more specific error messages and properties to help with debugging and error handling in your application.
 
-#### M. Implementing a Custom Error
+#### A. Implementing a Custom Error
 
 Inside of `jobController.js` we can import our new class and change the logic for missing resources as below:
 
@@ -852,7 +852,7 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 app.use(errorHandlerMiddleware);
 ```
 
-#### N. Bad Request, Unauthenticated, and Unauthorized Errors
+#### B. Bad Request, Unauthenticated, and Unauthorized Errors
 
 Continuing with custom errors, we want to get the following ready as well:
 
@@ -860,7 +860,7 @@ Continuing with custom errors, we want to get the following ready as well:
 - 401 UNAUTHORIZED Unauthorized
 - 403 FORBIDDEN Forbidden
 
-#### O. Validation Layer & Express Validator
+### 18. Validation Layer & Express Validator
 
 We want to have a validation layer, because we want our controller to be as slim as possible and not bloat it with logic that could go in another module.
 
@@ -902,15 +902,15 @@ app.post(
 );
 ```
 
-#### P. Validation Middleware
+#### A. Validation Middleware
 
 Depending on the amount of validation checks used, the code can get bloated, so the instructor recommends more middleware to separate the logic.
 
-#### Q. Setup Constants
+### 19. Setup Constants
 
 For more abstraction, we separate create a new utilities directory and a constants file at `utils/constants.js`. Then we can import the new objects into our job model.
 
-#### R. Validate Create Job
+### 20. Validate Create Job
 
 Since we know the validation middleware works, we remove the test route and test validation and begin writing validation for Jobs. We can test our new validation using the request body provided by the instructor below (test Create route specifically):
 
@@ -924,16 +924,16 @@ Since we know the validation middleware works, we remove the test route and test
 }
 ```
 
-#### S. Validate ID Parameter
+### 21. Validate ID Parameter
 
 For our other routes, we use the ID parameter, so we need some validation for these ID inputs as well.
 After adding validation for cases of 'id not found' we can remove the checks from the controllers and make those leaner.
 
-#### T. The User Model
+### 22. The User Model
 
 At this stage it we are advised by the instructor to wipe the database to restart from scratch; He shows us how to drop a database over on MongoDB Atlas. Next, we start with the second model of project: Users.
 
-#### U. User Controller and Router
+### 23. User Controller and Router
 
 Now that we'll users have a model, we need a way to interact with them by creating and logging them in. We start by creating the structure and basic functionality for a controller and a router:
 
@@ -969,7 +969,7 @@ import authRouter from './routers/authRouter.js';
 app.use('/api/v1/auth', authRouter);
 ```
 
-#### V. Create User - Initial Setup
+#### A. Create User - Initial Setup
 
 Now we edit `authController.js` to actually create a user based on the schema then persist it on the database. We are also given user json to send as the request body on Thunder Client (or Flashpost):
 
@@ -983,11 +983,11 @@ Now we edit `authController.js` to actually create a user based on the schema th
 }
 ```
 
-#### W. Validate User
+### 24. Validate User
 
 At the moment, there is no validation for users, so anything can be put in the request body. We'll fix that by starting a new validation check in `validationMiddleware.js`.
 
-#### X. Admin Role
+#### A. Admin Role
 
 The instructor gives us a short rundown about the admin role and creates a simple case where the first user of the site is automatically an admin. Here is the snippet in `authController.js`:
 
@@ -999,7 +999,7 @@ req.body.role = isFirstAccount ? 'admin' : 'user';
 const user = await User.create(req.body);
 ```
 
-#### Y. Hash Passwords
+#### B. Hash Passwords
 
 We never ever should keep passwords as raw strings on databases. It's a huge security concern and we should always hash passwords before they are stored. We'll be using [bcryptjs](https://www.npmjs.com/package/bcryptjs) to encrypt passwords for users in our project.
 
@@ -1032,15 +1032,15 @@ Ease of use: bcryptjs has a simpler and more intuitive API than bcrypt, which ca
 
 Overall, while bcrypt and bcryptjs are both good choices for hashing passwords in Node.js applications, bcryptjs is considered to be a better choice for its cross-platform compatibility, improved security, ease of use, and ongoing maintenance.
 
-#### Z. Setup Password Utils
+### 25. Setup Password Utils
 
 Once again, to ensure the controllers are as lean as possible, we will move the password encryption into its own file, `utils/passwordUtils.js` and then import the functionality into the controller.
 
-#### AA. Login User Validation
+### 26. Login User Validation
 
 For logging in, the instructor says the approach will be different from before, we will start with validation. To begin with, validation for logging in will be similar to registration, but we are only looking for email and password. Then within email, we don't need the custom check and in password, we don't need a length check; these will be very basic non-empty checks and a email-format check.
 
-#### AB. Unauthenticated Error
+#### A. Unauthenticated Error
 
 Now we will add the authentication functionality to check existing emails and matching passwords. We want to make sure a user with a matching email exists in the database, and if that email does exist, we then want to check if the password hash matches the one in the database paired to the email. We create a new function to compare passwords in `passwordUtils.js`:
 
@@ -1051,7 +1051,7 @@ export async function comparePassword(password, hashedPassword) {
 }
 ```
 
-#### AC. JSON Web Token
+### 27. JSON Web Token
 
 A JSON Web Token (JWT) is a compact and secure way of transmitting data between parties. It is often used to authenticate and authorize users in web applications and APIs. JWTs contain information about the user and additional metadata, and can be used to securely transmit this information
 
@@ -1082,7 +1082,7 @@ These environment variables (JWT_SECRET and JWT_EXPIRES_IN) are read from the sy
 
 We can test our token by decoding it at [JWT](https://jwt.io/).
 
-#### AD. HTTP-Only Cookie
+#### A. HTTP-Only Cookie
 
 An HTTP-only cookie is a cookie that can't be accessed by JavaScript running in the browser. It is designed to help prevent cross-site scripting (XSS) attacks, which can be used to steal cookies and other sensitive information.
 
@@ -1132,7 +1132,7 @@ export const getAllJobs = async (req, res) => {
 };
 ```
 
-#### AE. Clean DB + Connect User and Job
+### 28. Clean DB + Connect User and Job
 
 Before we continue we want to make sure our database is fresh so we drop the jobs and user tables. Next we add the following to `models/User.js`:
 
@@ -1149,7 +1149,7 @@ const JobSchema = new mongoose.Schema(
 );
 ```
 
-#### AF. Auth Middleware
+### 29. Auth Middleware
 
 To link Users and Jobs, we're going to need more middleware and we set up the structure in `middleware/authMiddleware.js`:
 
@@ -1168,7 +1168,7 @@ import { authenticateUser } from './middleware/authMiddleware.js';
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
 ```
 
-##### 1. Cookie Parser
+### 30. Cookie Parser
 
 [Cookie Parser](https://www.npmjs.com/package/cookie-parser)
 
@@ -1183,7 +1183,7 @@ import cookieParser from 'cookie-parser';
 app.use(cookieParser());
 ```
 
-#### Access Token
+#### A. Access the Token
 
 authMiddleware.js
 
@@ -1199,7 +1199,7 @@ export const authenticateUser = async (req, res, next) => {
 };
 ```
 
-#### Verify Token
+#### B. Verify the Token
 
 utils/tokenUtils.js
 
