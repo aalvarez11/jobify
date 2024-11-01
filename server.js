@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import jobRouter from './routes/jobRouter.js';
 import authRouter from './routes/authRouter.js';
+import userRouter from './routes/userRouter.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 
 // routers
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
+app.use('/api/v1/jobs', authenticateUser, userRouter);
 app.use('/api/v1/auth', authRouter);
 
 // Not Found middleware that should catch 404 for all routes non-existing routes
