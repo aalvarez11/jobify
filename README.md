@@ -1313,9 +1313,9 @@ export default router;
 
 note: no middleware needed (yet?)
 
-#### User Routes
+### 34. User Routes
 
-controllers/userController.js
+In order to manipulate User data, we'll need user routes, and to interact with user routes we'll need a user controller.
 
 ```js
 import { StatusCodes } from 'http-status-codes';
@@ -1361,7 +1361,7 @@ import userRouter from './routers/userRouter.js';
 app.use('/api/v1/users', authenticateUser, userRouter);
 ```
 
-#### Get Current User
+#### A. Get Current User Functionality
 
 ```js
 export const getCurrentUser = async (req, res) => {
