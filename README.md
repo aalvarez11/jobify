@@ -1038,57 +1038,11 @@ Once again, to ensure the controllers are as lean as possible, we will move the 
 
 #### AA. Login User Validation
 
-For logging in, the instructor says the approach will be different from before, we will start with validation.
+For logging in, the instructor says the approach will be different from before, we will start with validation. To begin with, validation for logging in will be similar to registration, but we are only looking for email and password. Then within email, we don't need the custom check and in password, we don't need a length check; these will be very basic non-empty checks and a email-format check.
 
-```json
-{
-  "email": "john@gmail.com",
-  "password": "secret123"
-}
-```
+#### AB. Unauthenticated Error
 
-validationMiddleware.js
-
-```js
-export const validateLoginInput = withValidationErrors([
-  body('email')
-    .notEmpty()
-    .withMessage('email is required')
-    .isEmail()
-    .withMessage('invalid email format'),
-  body('password').notEmpty().withMessage('password is required'),
-]);
-```
-
-authRouter.js
-
-```js
-import { validateLoginInput } from '../middleware/validationMiddleware.js';
-
-router.post('/login', validateLoginInput, login);
-```
-
-#### Unauthenticated Error
-
-authController.js
-
-```js
-import { UnauthenticatedError } from '../errors/customErrors.js';
-
-const login = async (req, res) => {
-  // check if user exists
-  // check if password is correct
-
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) throw new UnauthenticatedError('invalid credentials');
-
-  res.send('login route');
-};
-```
-
-#### Compare Password
-
-passwordUtils.js
+Now we will add the authentication functionality to check existing emails and matching passwords. We want to make sure a user with a matching email exists in the database, and if that email does exist, we then want to check if the password hash matches the one in the database paired to the email. We create a new function to compare passwords in `passwordUtils.js`:
 
 ```js
 export async function comparePassword(password, hashedPassword) {
@@ -1097,37 +1051,7 @@ export async function comparePassword(password, hashedPassword) {
 }
 ```
 
-authController.js
-
-```js
-import { hashPassword, comparePassword } from '../utils/passwordUtils.js';
-
-const login = async (req, res) => {
-  // check if user exists
-  // check if password is correct
-
-  const user = await User.findOne({ email: req.body.email });
-
-  if (!user) throw new UnauthenticatedError('invalid credentials');
-
-  const isPasswordCorrect = await comparePassword(
-    req.body.password,
-    user.password
-  );
-
-  if (!isPasswordCorrect) throw new UnauthenticatedError('invalid credentials');
-  res.send('login route');
-};
-```
-
-Refactor
-
-```js
-const isValidUser = user && (await comparePassword(password, user.password));
-if (!isValidUser) throw new UnauthenticatedError('invalid credentials');
-```
-
-#### JSON Web Token
+#### AC. JSON Web Token
 
 A JSON Web Token (JWT) is a compact and secure way of transmitting data between parties. It is often used to authenticate and authorize users in web applications and APIs. JWTs contain information about the user and additional metadata, and can be used to securely transmit this information
 
