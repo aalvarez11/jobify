@@ -1061,7 +1061,7 @@ A JSON Web Token (JWT) is a compact and secure way of transmitting data between 
 npm i jsonwebtoken@9.0.0
 ```
 
-utils/tokenUtils.js
+We will be creating a new utility for our project's tokens at `utils/tokenUtils.js`, and we add 2 new env variables as seen below. Reminder for adding ENV variables! Restart your server so they can take effect!
 
 ```js
 import jwt from 'jsonwebtoken';
@@ -1080,35 +1080,13 @@ JWT_EXPIRES_IN specifies the expiration time for the JWT. It determines how long
 
 These environment variables (JWT_SECRET and JWT_EXPIRES_IN) are read from the system environment during runtime, allowing for flexibility in configuration without modifying the code.
 
-authController.js
+We can test our token by decoding it at [JWT](https://jwt.io/).
 
-```js
-import { createJWT } from '../utils/tokenUtils.js';
-
-const token = createJWT({ userId: user._id, role: user.role });
-console.log(token);
-```
-
-#### Test JWT (optional)
-
-[JWT](https://jwt.io/)
-
-#### ENV Variables
-
-- RESTART SERVER!!!!
-
-.env
-
-```js
-JWT_SECRET=
-JWT_EXPIRES_IN=
-```
-
-#### HTTP Only Cookie
+#### AD. HTTP-Only Cookie
 
 An HTTP-only cookie is a cookie that can't be accessed by JavaScript running in the browser. It is designed to help prevent cross-site scripting (XSS) attacks, which can be used to steal cookies and other sensitive information.
 
-##### HTTP Only Cookie VS Local Storage
+##### HTTP-Only Cookie VS Local Storage
 
 An HTTP-only cookie is a type of cookie that is designed to be inaccessible to JavaScript running in the browser. It is primarily used for authentication purposes and is a more secure way of storing sensitive information like user tokens. Local storage, on the other hand, is a browser-based storage mechanism that is accessible to JavaScript, and is used to store application data like preferences or user-generated content. While local storage is convenient, it is not a secure way of storing sensitive information as it can be accessed and modified by JavaScript running in the browser.
 
