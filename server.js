@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 import jobRouter from './routes/jobRouter.js';
 import authRouter from './routes/authRouter.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
@@ -18,6 +19,9 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+//activate cookie parser
+app.use(cookieParser());
 
 // Enables Json
 app.use(express.json());
