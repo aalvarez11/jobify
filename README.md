@@ -1254,11 +1254,17 @@ export const createJob = async (req, res) => {
 };
 ```
 
-#### Check Permissions
+### 32. Check Permissions
 
-validationMiddleware.js
+We want to check to make sure only users who created the job can view specific jobs. We go into `validationMiddleware.js`:
 
 ```js
+import {
+  BadRequestError,
+  NotFoundError,
+  UnauthorizedError,
+} from '../errors/customErrors.js';
+
 const withValidationErrors = (validateValues) => {
   return [
     validateValues,
@@ -1276,15 +1282,7 @@ const withValidationErrors = (validateValues) => {
     },
   ];
 };
-```
-
-```js
-import {
-  BadRequestError,
-  NotFoundError,
-  UnauthorizedError,
-} from '../errors/customErrors.js';
-
+...
 export const validateIdParam = withValidationErrors([
   param('id').custom(async (value, { req }) => {
     const isValidMongoId = mongoose.Types.ObjectId.isValid(value);
