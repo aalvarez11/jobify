@@ -1408,25 +1408,17 @@ router.get('/admin/app-stats', [
 ]);
 ```
 
-### 35. Setup Proxy
+### 35. Setup a Proxy
 
-- only in dev env
-- a must since cookies are sent back to the same server
+A proxy in front-end development is a server that acts as an intermediary between the client-side app and an external API, helping to bypass security restrictions and handle requests to different domains. It allows the front-end app to make API requests through the proxy, which forwards the requests to the external API and returns the responses back to the app.
+
+- only in dev environment
+- a must, since cookies are sent back to the same server
 - spin up both servers (our own and vite dev)
 
-- server
+To run the server open one terminal and run command: `npm run dev`. To run the vite dev server (client) open a second terminal and run command: `cd client && npm run dev`
 
-```sh
-npm run dev
-```
-
-- vite dev server
-
-```sh
-cd client && npm run dev
-```
-
-server.js
+add the following test route to our `server.js`:
 
 ```js
 app.get('/api/v1/test', (req, res) => {
@@ -1434,7 +1426,7 @@ app.get('/api/v1/test', (req, res) => {
 });
 ```
 
-client/src/main.jsx
+Inside the client main at `client/src/main.jsx` add the following:
 
 ```js
 fetch('http://localhost:5100/api/v1/test')
@@ -1442,7 +1434,7 @@ fetch('http://localhost:5100/api/v1/test')
   .then((data) => console.log(data));
 ```
 
-client/vite.config.js
+Next, in `client/vite.config.js` copy/paste this code to avoid any typo errors:
 
 ```js
 export default defineConfig({
@@ -1459,7 +1451,7 @@ export default defineConfig({
 });
 ```
 
-main.jsx
+Now go back to the `main.jsx` in the client and cut out the localhost:
 
 ```js
 fetch('/api/v1/test')
@@ -1478,7 +1470,7 @@ rewrite: (path) => path.replace(/^\/api/, ''): This property allows you to modif
 
 To summarize, these lines of code configure a proxy rule for requests starting with /api on the development server. The requests will be redirected to http://localhost:5100/api, with the /api prefix removed from the path.
 
-#### Concurrently
+### 36. Concurrently
 
 The concurrently npm package is a utility that allows you to run multiple commands concurrently in the same terminal window. It provides a convenient way to execute multiple tasks or processes simultaneously.
 
