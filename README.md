@@ -1363,32 +1363,7 @@ app.use('/api/v1/users', authenticateUser, userRouter);
 
 #### A. Get Current User Functionality
 
-```js
-export const getCurrentUser = async (req, res) => {
-  const user = await User.findOne({ _id: req.user.userId });
-  res.status(StatusCodes.OK).json({ user });
-};
-```
-
-#### Remove Password
-
-models/UserModel.js
-
-```js
-UserSchema.methods.toJSON = function () {
-  var obj = this.toObject();
-  delete obj.password;
-  return obj;
-};
-```
-
-```js
-export const getCurrentUser = async (req, res) => {
-  const user = await User.findOne({ _id: req.user.userId });
-  const userWithoutPassword = user.toJSON();
-  res.status(StatusCodes.OK).json({ user: userWithoutPassword });
-};
-```
+We add the functionality to getCurrentUser, however, when we test it we can see the password hash in the response. Even seeing a hash is a major security issue, so we go back into the user model and add functionality to hide the password.
 
 #### Update User
 
