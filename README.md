@@ -1020,7 +1020,7 @@ The resulting hash value is a string that represents the hashed password. This s
 
 By using a salt value and a one-way hash function, bcrypt helps to ensure that user passwords are stored securely and are resistant to attacks like password cracking and brute-force attacks.
 
-##### BCRYPT VS BCRYPTJS
+###### 1. BCRYPT VS BCRYPTJS
 
 bcrypt and bcryptjs are both popular libraries for hashing passwords in Node.js applications. However, bcryptjs is considered to be a better choice for a few reasons:
 
@@ -1032,37 +1032,13 @@ Ease of use: bcryptjs has a simpler and more intuitive API than bcrypt, which ca
 
 Overall, while bcrypt and bcryptjs are both good choices for hashing passwords in Node.js applications, bcryptjs is considered to be a better choice for its cross-platform compatibility, improved security, ease of use, and ongoing maintenance.
 
-#### Setup Password Utils
+#### Z. Setup Password Utils
 
-utils/passwordUtils.js
+Once again, to ensure the controllers are as lean as possible, we will move the password encryption into its own file, `utils/passwordUtils.js` and then import the functionality into the controller.
 
-```js
-import bcrypt from 'bcryptjs';
+#### AA. Login User Validation
 
-export async function hashPassword(password) {
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-  return hashedPassword;
-}
-```
-
-authController.js
-
-```js
-import { hashPassword } from '../utils/passwordUtils.js';
-
-const register = async (req, res) => {
-  const hashedPassword = await hashPassword(req.body.password);
-  req.body.password = hashedPassword;
-
-  const user = await User.create(req.body);
-  res.status(StatusCodes.CREATED).json({ msg: 'user created' });
-};
-```
-
-#### Login User
-
-- login user request
+For logging in, the instructor says the approach will be different from before, we will start with validation.
 
 ```json
 {
