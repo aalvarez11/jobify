@@ -1132,11 +1132,9 @@ export const getAllJobs = async (req, res) => {
 };
 ```
 
-#### Clean DB
+#### AE. Clean DB + Connect User and Job
 
-#### Connect User and Job
-
-models/User.js
+Before we continue we want to make sure our database is fresh so we drop the jobs and user tables. Next we add the following to `models/User.js`:
 
 ```js
 const JobSchema = new mongoose.Schema(
@@ -1151,9 +1149,9 @@ const JobSchema = new mongoose.Schema(
 );
 ```
 
-#### Auth Middleware
+#### AF. Auth Middleware
 
-middleware/authMiddleware.js
+To link Users and Jobs, we're going to need more middleware and we set up the structure in `middleware/authMiddleware.js`:
 
 ```js
 export const authenticateUser = async (req, res, next) => {
@@ -1162,7 +1160,7 @@ export const authenticateUser = async (req, res, next) => {
 };
 ```
 
-server.js
+Then put it before the job router in `server.js`:
 
 ```js
 import { authenticateUser } from './middleware/authMiddleware.js';
@@ -1170,12 +1168,12 @@ import { authenticateUser } from './middleware/authMiddleware.js';
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
 ```
 
-##### Cookie Parser
+##### 1. Cookie Parser
 
 [Cookie Parser](https://www.npmjs.com/package/cookie-parser)
 
 ```sh
-npm i cookie-parser@1.4.6
+npm i cookie-parser
 ```
 
 server.js
