@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 // routers
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
-app.use('/api/v1/jobs', authenticateUser, userRouter);
+app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/auth', authRouter);
 
 // Not Found middleware that should catch 404 for all routes non-existing routes
