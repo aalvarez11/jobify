@@ -1478,6 +1478,8 @@ The concurrently npm package is a utility that allows you to run multiple comman
 npm i concurrently@8.0.1
 ```
 
+After installing, go to `package.json` and look at the scripts, we'll be
+
 ```json
 "scripts": {
     "setup-project": "npm i && cd client && npm i",
