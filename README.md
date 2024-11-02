@@ -1652,9 +1652,10 @@ const Register = () => {
 export default Register;
 ```
 
-#### React-Toastify
+### 4. React-Toastify
 
 Import and set up the react-toastify library.
+NOTE: This should already be installed to the client from the initial setup!
 
 [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
 

@@ -2,6 +2,7 @@ import { Form, redirect, useNavigation, Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/RegisterAndLoginPage';
 import { FormRow, Logo } from '../components';
 import customFetch from '../utils/customFetch';
+import { toast } from 'react-toastify';
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -9,14 +10,19 @@ export const action = async ({ request }) => {
 
   try {
     await customFetch.post('/auth/register', data);
+    toast.success('Registration successful');
     return redirect('/login');
   } catch (error) {
-    console.log(error);
+    toast.error(error?.response?.data?.msg);
     return error;
   }
 };
 
 const Register = () => {
+  const navigation = useNavigation();
+  console.log(navigation);
+  const isSubmitting = navigation.state === 'submitting';
+
   return (
     <Wrapper>
       <Form method='post' className='form'>
@@ -32,8 +38,8 @@ const Register = () => {
         <FormRow type='text' name='location' defaultValue='earth' />
         <FormRow type='email' name='email' defaultValue='alicep@gmail.com' />
         <FormRow type='password' name='password' defaultValue='secret123' />
-        <button type='submit' className='btn btn-block'>
-          submit
+        <button type='submit' className='btn btn-block' disabled={isSubmitting}>
+          {isSubmitting ? 'submitting...' : 'submit'}
         </button>
         <p>
           Already a member?
