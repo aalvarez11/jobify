@@ -1170,13 +1170,13 @@ app.use('/api/v1/jobs', authenticateUser, jobRouter);
 
 ### 30. Cookie Parser
 
-[Cookie Parser](https://www.npmjs.com/package/cookie-parser)
+In order to be able to interact with the cookie on the server, the instructor tells us about [Cookie Parser](https://www.npmjs.com/package/cookie-parser). The following command will install the package:
 
 ```sh
 npm i cookie-parser
 ```
 
-server.js
+After that just import it to `server.js` and tell the server to use it:
 
 ```js
 import cookieParser from 'cookie-parser';
@@ -1185,7 +1185,7 @@ app.use(cookieParser());
 
 #### A. Access the Token
 
-authMiddleware.js
+Now that we have cookie parser we can access the cookie's content, and we can start setting up token verification. We start by taking the token out of the current cookie, if there is any, and throw an authentication error if there isn't. The setup is in the snippet below:
 
 ```js
 import { UnauthenticatedError } from '../customErrors.js';
@@ -1201,16 +1201,7 @@ export const authenticateUser = async (req, res, next) => {
 
 #### B. Verify the Token
 
-utils/tokenUtils.js
-
-```js
-export const verifyJWT = (token) => {
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  return decoded;
-};
-```
-
-authMiddleware.js
+We set up a token check, but the instructor shows us that there's a catch. There isn't a check to distinguish admins from regular users. The instructor starts by setting up a new utility function to decode the token, then imports it into `authMiddleware.js`:
 
 ```js
 import { UnauthenticatedError } from '../customErrors.js';
@@ -1232,11 +1223,11 @@ export const authenticateUser = async (req, res, next) => {
 };
 ```
 
-jobController.js
+To showcase the token authentication, the instructor adds a log to `jobController.js` and shows us in the terminal that we will be distinguishing admins from regular users.
 
 ```js
 export const getAllJobs = async (req, res) => {
-  console.log(req.user);
+  console.log(req.user); //right here
   const jobs = await Job.find({ createdBy: req.user.userId });
   res.status(StatusCodes.OK).json({ jobs });
 };
@@ -1244,7 +1235,7 @@ export const getAllJobs = async (req, res) => {
 
 ### 31. Refactor Create Job
 
-jobController.js
+Now we'll begin connecting users to jobs by linking the job's `createdBy` property to the logged in user's `userId` inside `jobController.js`:
 
 ```js
 export const createJob = async (req, res) => {
@@ -1315,7 +1306,7 @@ note: no middleware needed (yet?)
 
 ### 34. User Routes
 
-In order to manipulate User data, we'll need user routes, and to interact with user routes we'll need a user controller.
+In order to manipulate User data, we'll need user routes, and to interact with user routes we'll need a user controller:
 
 ```js
 import { StatusCodes } from 'http-status-codes';
@@ -1335,7 +1326,7 @@ export const updateUser = async (req, res) => {
 };
 ```
 
-routes/userRouter.js
+next comes the user router:
 
 ```js
 import { Router } from 'express';
