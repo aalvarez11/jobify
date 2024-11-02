@@ -1663,7 +1663,7 @@ NOTE: This should already be installed to the client from the initial setup!
 npm i react-toastify@9.1.2
 ```
 
-main.jsx
+To use toasts first we need to add a toast container to `main.jsx`:
 
 ```js
 import 'react-toastify/dist/ReactToastify.css';
@@ -1676,7 +1676,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 );
 ```
 
-Register.jsx
+Now we can add toasts to `Register.jsx`, for successful registration or for our error popups:
 
 ```js
 import { toast } from 'react-toastify';
