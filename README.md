@@ -1553,7 +1553,9 @@ const MyForm = () => {
 export default MyForm;
 ```
 
-#### React Router - Action
+## Part 3 - Connect the Front and Back
+
+### 1. React Router - Action
 
 Route actions are the "writes" to route loader "reads". They provide a way for apps to perform data mutations with simple HTML and HTTP semantics while React Router abstracts away the complexity of asynchronous UI and revalidation. This gives you the simple mental model of HTML + HTTP (where the browser handles the asynchrony and revalidation) with the behavior and UX capabilities of modern SPAs.
 
@@ -1576,7 +1578,7 @@ const Register = () => {
 export default Register;
 ```
 
-App.jsx
+We also need to add an action to our register path inside `App.jsx`:
 
 ```jsx
 {
@@ -1589,7 +1591,7 @@ App.jsx
 },
 ```
 
-#### Register User
+### 2. Register User
 
 - FormData API
 
