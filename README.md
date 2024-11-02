@@ -1491,17 +1491,19 @@ After installing, go to `package.json` and look at the scripts, we'll be
 
 By default, when a command fails, concurrently continues running the remaining commands. However, when --kill-others-on-fail is specified, if any of the commands fail, concurrently will immediately terminate all the other running commands.
 
-#### Axios
+### 37. Axios
 
 Axios is a popular JavaScript library that simplifies the process of making HTTP requests from web browsers or Node.js. It provides a simple and elegant API for performing asynchronous HTTP requests, supporting features such as making GET, POST, PUT, and DELETE requests, handling request and response headers, handling request cancellation, and more.
 
 [Axios Docs](https://axios-http.com/docs/intro)
 
+The instructor recommends the Axios library to help with requests, but know that this package is meant for the client. NOTE: This should have been installed way back in the client portion of the course, if you are missing the package however, use `cd client` to jump into the client folder then run the following to install axios:
+
 ```sh
 npm i axios@1.3.6
 ```
 
-main.jsx
+An example of using axios for a request in `main.jsx`:
 
 ```js
 import axios from 'axios';
@@ -1510,9 +1512,9 @@ const data = await axios.get('/api/v1/test');
 console.log(data);
 ```
 
-#### Custom Instance
+##### A. Custom Instance
 
-utils/customFetch.js
+The instructor showcases separation and recommends using a utility to add another layer to the app. Here is `utils/customFetch.js`:
 
 ```js
 import axios from 'axios';
@@ -1523,7 +1525,7 @@ const customFetch = axios.create({
 export default customFetch;
 ```
 
-main.jsx
+and then import it into `main.jsx`
 
 ```js
 import customFetch from './utils/customFetch.js';
@@ -1532,7 +1534,7 @@ const data = await customFetch.get('/test');
 console.log(data);
 ```
 
-#### Typical Form Submission
+#### B. Typical Form Submission
 
 ```js
 import { useState } from 'react';
