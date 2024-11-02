@@ -1746,7 +1746,9 @@ const Login = () => {
 export default Login;
 ```
 
-#### Access Action Data (optional)
+#### A. Access Action Data (optional)
+
+The instructor shows us another way we could display our messages by using the `useActionData` hook.
 
 ```js
 import { useActionData } from 'react-router-dom';
@@ -1786,7 +1788,7 @@ const Login = () => {
 export default Login;
 ```
 
-#### Get Current User
+### 6. Get Current User
 
 Each route can define a "loader" function to provide data to the route element before it renders.
 
