@@ -1589,6 +1589,8 @@ We also need to add an action to our register path inside `App.jsx`:
 [FormData API - JS Nuggets](https://youtu.be/5-x4OUM-SP8)
 [FormData API - React ](https://youtu.be/WrX5RndZIzw)
 
+Register still needs functionality to actually parse the data users place in the form, so we take the info from the request and organize it into an object. Then we make the post request to the server to persist new users. The instructor also shows us that within axios' bulky response, we can still find and see our validation layer error messages if users try submitting invalid info like short passwords or no names.
+
 Register.jsx
 
 ```js
@@ -1616,7 +1618,7 @@ import { action as registerAction } from './pages/Register';
 },
 ```
 
-#### useNavigation() and navigation.state
+### 3. useNavigation() and navigation.state
 
 This hook tells you everything you need to know about a page navigation to build pending navigation indicators and optimistic UI on data mutations. Things like:
 
