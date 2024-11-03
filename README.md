@@ -2107,7 +2107,7 @@ const AllJobs = () => {
 export default AllJobs;
 ```
 
-#### Setup All Jobs Context
+##### 1. Setup All Jobs Context
 
 ```js
 const AllJobsContext = createContext();
@@ -2126,7 +2126,7 @@ const AllJobs = () => {
 export const useAllJobsContext = () => useContext(AllJobsContext);
 ```
 
-#### Render Jobs
+##### 2. Render Jobs
 
 - create Job.jsx
 
