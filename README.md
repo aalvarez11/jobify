@@ -1792,7 +1792,7 @@ export default Login;
 
 Each route can define a "loader" function to provide data to the route element before it renders.
 
-- must return a value
+Like actions, loaders must return a value!
 
 DashboardLayout.jsx
 
@@ -1841,7 +1841,7 @@ export default DashboardLayout;
 
 ```
 
-#### Logout User
+### 7. Logout User
 
 DashboardLayout.jsx
 
@@ -1860,7 +1860,7 @@ const DashboardLayout = () => {
 };
 ```
 
-#### AddJob - Structure
+### 8. AddJob - Structure
 
 pages/AddJob.jsx
 
