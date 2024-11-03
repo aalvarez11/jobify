@@ -2128,9 +2128,7 @@ export const useAllJobsContext = () => useContext(AllJobsContext);
 
 ##### 2. Render Jobs
 
-- create Job.jsx
-
-JobsContainer.jsx
+For displaying individual jobs we create a job component `Job.jsx`. Then we start setting up the displaying of jobs inside `JobsContainer.jsx` (at the moment Job only has headers but if we see headers that say 'Job' we're on the right track):
 
 ```js
 import Job from './Job';
@@ -2163,7 +2161,7 @@ const JobsContainer = () => {
 export default JobsContainer;
 ```
 
-#### JobsContainer - CSS (optional)
+##### 3. JobsContainer - CSS (optional)
 
 wrappers/JobsContainer.js
 
