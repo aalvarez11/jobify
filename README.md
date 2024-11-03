@@ -2000,9 +2000,9 @@ export const action = async ({ request }) => {
 };
 ```
 
-#### Pending Class and Redirect
+#### D. Pending Class and Redirect
 
-wrappers/BigSidebar.js
+At the moment, when a job is submitting, the `Add Job` link on the big side nav turns yellow, so we overwrite the `.pending` selector in the `BigSidebar.js` wrapper:
 
 ```css
 .pending {
@@ -2010,25 +2010,9 @@ wrappers/BigSidebar.js
 }
 ```
 
-AddJob.jsx
+When successful, we want to redirect the user, so we change the return beneath toast.success to `redirect('all-jobs')` inside `AddJob.jsx`.
 
-```js
-export const action = async ({ request }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-
-  try {
-    await customFetch.post('/jobs', data);
-    toast.success('Job added successfully');
-    return redirect('all-jobs');
-  } catch (error) {
-    toast.error(error?.response?.data?.msg);
-    return error;
-  }
-};
-```
-
-#### Add Job - CSS(optional)
+#### E. Add Job - CSS(optional)
 
 wrappers/DashboardFormPage.js
 
