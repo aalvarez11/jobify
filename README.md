@@ -2193,7 +2193,9 @@ const Wrapper = styled.section`
 export default Wrapper;
 ```
 
-#### Dayjs
+##### 4. Dayjs and Job Component
+
+Dev note: this is another client-side package that should have been installed earlier! Check `client/package-lock.json`.
 
 ```sh
 npm i dayjs@1.11.7
@@ -2201,9 +2203,7 @@ npm i dayjs@1.11.7
 
 [Dayjs Docs](https://day.js.org/docs/en/installation/installation)
 
-#### Job Component
-
-- create JobInfo component
+We create a plain JobInfo component since it would be reused code and begin adding elements to the `Job.jsx` component.
 
 ```js
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
@@ -2259,7 +2259,7 @@ const Job = ({
 export default Job;
 ```
 
-#### JobInfo Component
+Once we finish with Job and know the props we want to pass, we can write `JobInfo.jsx`:
 
 ```js
 import Wrapper from '../assets/wrappers/JobInfo';
@@ -2276,7 +2276,7 @@ const JobInfo = ({ icon, text }) => {
 export default JobInfo;
 ```
 
-#### JobInfo - CSS (optional)
+##### 5. JobInfo - CSS (optional)
 
 wrappers/JobInfo.js
 
