@@ -64,10 +64,9 @@ const Wrapper = styled.aside`
       color: var(--primary-500);
     }
 
-    // this was missing from the bigsidebar css tutorial, used later?
-    /* .pending {
+    .pending {
       background: var(--background-color);
-    } */
+    }
   }
 `;
 export default Wrapper;
