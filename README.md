@@ -1860,7 +1860,9 @@ const DashboardLayout = () => {
 };
 ```
 
-### 8. AddJob - Structure
+### 8. Jobs Pages
+
+#### A. AddJob - Structure
 
 pages/AddJob.jsx
 
@@ -1908,7 +1910,7 @@ const AddJob = () => {
 export default AddJob;
 ```
 
-#### A. Select Input
+##### 1. Select Input
 
 ```js
 <div className='form-row'>
@@ -1932,7 +1934,7 @@ export default AddJob;
 </div>
 ```
 
-#### B. FormRowSelect Component
+##### 2. FormRowSelect Component
 
 components/FormRowSelect.jsx
 
@@ -1980,7 +1982,7 @@ pages/AddJob.jsx
   />
 ```
 
-#### C. Create Job
+##### 3. Create Job Functionality
 
 Now we want to add the functionality for actually creating a job on the server into `AddJob.jsx`:
 
@@ -2000,7 +2002,7 @@ export const action = async ({ request }) => {
 };
 ```
 
-#### D. Pending Class and Redirect
+##### 4. Pending Class and Redirect
 
 At the moment, when a job is submitting, the `Add Job` link on the big side nav turns yellow, so we overwrite the `.pending` selector in the `BigSidebar.js` wrapper:
 
@@ -2012,7 +2014,7 @@ At the moment, when a job is submitting, the `Add Job` link on the big side nav 
 
 When successful, we want to redirect the user, so we change the return beneath toast.success to `redirect('all-jobs')` inside `AddJob.jsx`.
 
-#### E. Add Job - CSS(optional)
+##### 5. Add Job - CSS(optional)
 
 wrappers/DashboardFormPage.js
 
@@ -2068,7 +2070,7 @@ const Wrapper = styled.section`
 export default Wrapper;
 ```
 
-#### All Jobs - Structure
+#### B. All Jobs - Structure
 
 - create JobsContainer and SearchContainer (export)
 - handle loader in App.jsx
