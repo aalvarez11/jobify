@@ -6,6 +6,7 @@ const Wrapper = styled.article`
   display: grid;
   grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
+
   header {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--grey-100);
@@ -13,6 +14,7 @@ const Wrapper = styled.article`
     grid-template-columns: auto 1fr;
     align-items: center;
   }
+
   .main-icon {
     width: 60px;
     height: 60px;
@@ -26,10 +28,12 @@ const Wrapper = styled.article`
     color: var(--white);
     margin-right: 2rem;
   }
+
   .info {
     h5 {
       margin-bottom: 0.5rem;
     }
+
     p {
       margin: 0;
       text-transform: capitalize;
@@ -37,9 +41,11 @@ const Wrapper = styled.article`
       color: var(--text-secondary-color);
     }
   }
+
   .content {
     padding: 1rem 1.5rem;
   }
+
   .content-center {
     display: grid;
     margin-top: 1rem;
@@ -47,10 +53,12 @@ const Wrapper = styled.article`
     grid-template-columns: 1fr;
     row-gap: 1.5rem;
     align-items: center;
+
     @media (min-width: 576px) {
       grid-template-columns: 1fr 1fr;
     }
   }
+
   .status {
     border-radius: var(--border-radius);
     text-transform: capitalize;
@@ -61,11 +69,13 @@ const Wrapper = styled.article`
     display: grid;
     align-items: center;
   }
+
   .actions {
     margin-top: 1rem;
     display: flex;
     align-items: center;
   }
+
   .edit-btn,
   .delete-btn {
     height: 30px;
@@ -73,6 +83,7 @@ const Wrapper = styled.article`
     display: flex;
     align-items: center;
   }
+
   .edit-btn {
     margin-right: 0.5rem;
   }

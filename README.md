@@ -2276,9 +2276,9 @@ const JobInfo = ({ icon, text }) => {
 export default JobInfo;
 ```
 
-##### 5. JobInfo - CSS (optional)
+##### 5. JobInfo & Job - CSS (optional)
 
-wrappers/JobInfo.js
+`wrappers/JobInfo.js`
 
 ```js
 import styled from 'styled-components';
@@ -2304,7 +2304,7 @@ const Wrapper = styled.div`
 export default Wrapper;
 ```
 
-#### Job - CSS (optional)
+`wrappers/Job.js`
 
 ```js
 import styled from 'styled-components';
@@ -2393,7 +2393,7 @@ const Wrapper = styled.article`
 export default Wrapper;
 ```
 
-#### Edit Job - Setup
+#### C. Edit Job - Setup
 
 Job.jsx
 
