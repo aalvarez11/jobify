@@ -1908,7 +1908,7 @@ const AddJob = () => {
 export default AddJob;
 ```
 
-#### Select Input
+#### A. Select Input
 
 ```js
 <div className='form-row'>
@@ -1932,7 +1932,7 @@ export default AddJob;
 </div>
 ```
 
-#### FormRowSelect Component
+#### B. FormRowSelect Component
 
 components/FormRowSelect.jsx
 
@@ -1980,9 +1980,9 @@ pages/AddJob.jsx
   />
 ```
 
-#### Create Job
+#### C. Create Job
 
-AddJob.jsx
+Now we want to add the functionality for actually creating a job on the server into `AddJob.jsx`:
 
 ```js
 export const action = async ({ request }) => {
