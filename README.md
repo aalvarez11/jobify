@@ -2633,7 +2633,7 @@ NavLinks.jsx
 }
 ```
 
-#### StatItem Component
+#### A. StatItem Component
 
 - create StatItem.jsx
 - import/export
@@ -2688,7 +2688,7 @@ const Admin = () => {
 export default Admin;
 ```
 
-#### Admin - CSS (optional)
+#### B. Admin - CSS (optional)
 
 wrappers/StatsContainer.js
 

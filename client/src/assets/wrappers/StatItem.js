@@ -11,6 +11,7 @@ const Wrapper = styled.article`
     align-items: center;
     justify-content: space-between;
   }
+
   .count {
     display: block;
     font-weight: 700;
@@ -18,6 +19,7 @@ const Wrapper = styled.article`
     color: ${(props) => props.color};
     line-height: 2;
   }
+
   .title {
     margin: 0;
     text-transform: capitalize;
@@ -26,14 +28,16 @@ const Wrapper = styled.article`
     margin-top: 0.5rem;
     font-size: 1.25rem;
   }
+
   .icon {
     width: 70px;
     height: 60px;
-    background: ${(props) => props.bcg};
+    background: ${(props) => props.bgcolor};
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
+
     svg {
       font-size: 2rem;
       color: ${(props) => props.color};
