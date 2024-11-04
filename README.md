@@ -2575,7 +2575,7 @@ import { action as deleteJobAction } from './pages/DeleteJob';
  { path: 'delete-job/:id', action: deleteJobAction },
 ```
 
-#### Admin Page
+### 9. Admin Page
 
 pages/Admin.jsx
 
