@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import jobRouter from './routes/jobRouter.js';
 import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
@@ -20,6 +22,10 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// public file access
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.resolve(__dirname, './public')));
 
 //activate cookie parser
 app.use(cookieParser());
