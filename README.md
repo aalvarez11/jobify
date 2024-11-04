@@ -2428,6 +2428,7 @@ export default EditJob;
 ```
 
 - import EditJob page
+
   App.jsx
 
 ```js
@@ -2471,7 +2472,7 @@ const EditJob = () => {
 export default EditJob;
 ```
 
-#### Edit Job - Complete
+##### 1. Edit Job - Complete
 
 ```js
 export const action = async ({ request, params }) => {
@@ -2536,7 +2537,7 @@ const EditJob = () => {
 export default EditJob;
 ```
 
-#### Delete Job
+#### D. Delete Job
 
 Job.jsx
 
