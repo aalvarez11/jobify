@@ -3033,8 +3033,7 @@ export default SubmitBtn;
 
 #### K. Test User
 
-- create test user
-- feel free to use one of the chatGPT options
+The instructor wants to showcase the 'explore the app' option that can be seen at the Login page, so he leads the example by creating a test user via Thunder Client. He also gives us the following json objects if we wish to use them:
 
 ```json
 {
@@ -3044,6 +3043,7 @@ export default SubmitBtn;
   "lastName": "ShakeAndBake",
   "location": "Codeville"
 }
+
 {
   "name": "Chuckleberry",
   "email": "test@test.com",
@@ -3060,7 +3060,6 @@ export default SubmitBtn;
   "location": "Giggle City"
 }
 
-
 {
   "name": "Gigglesworth",
   "email": "test@test.com",
@@ -3070,7 +3069,7 @@ export default SubmitBtn;
 }
 ```
 
-#### Test User - Login Page
+##### 1. Test User - Login Page
 
 ```js
 import { useNavigate } from 'react-router-dom';
@@ -3104,7 +3103,7 @@ const Login = () => {
 export default Login;
 ```
 
-#### Test User - Restrict Access
+##### 2. Test User - Restrict Access
 
 authMiddleware
 
