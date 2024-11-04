@@ -47,9 +47,9 @@ app.get('/', (req, res) => {
 });
 
 // test route for proxy
-// app.get('/api/v1/test', (req, res) => {
-//   res.json({ msg: 'test route' });
-// });
+app.get('/api/v1/test', (req, res) => {
+  res.json({ msg: 'test route' });
+});
 
 // routers
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
