@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import cloudinary from 'cloudinary';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import jobRouter from './routes/jobRouter.js';
@@ -23,11 +24,18 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// public file access
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
+
+// Public file access
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.resolve(__dirname, './public')));
 
-//activate cookie parser
+// Activate cookie parser
 app.use(cookieParser());
 
 // Enables Json
@@ -38,10 +46,10 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-//test route for proxy
-app.get('/api/v1/test', (req, res) => {
-  res.json({ msg: 'test route' });
-});
+// test route for proxy
+// app.get('/api/v1/test', (req, res) => {
+//   res.json({ msg: 'test route' });
+// });
 
 // routers
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
