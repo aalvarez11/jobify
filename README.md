@@ -2994,7 +2994,7 @@ export const updateUser = async (req, res) => {
 };
 ```
 
-#### Logout Container
+##### 1. Logout Container
 
 ```js
 {
@@ -3006,7 +3006,7 @@ export const updateUser = async (req, res) => {
 }
 ```
 
-#### Submit Btn Component
+#### J. Submit Btn Component
 
 - create component SubmitBtn (export/import)
 - add all classes, including'.form-btn'
@@ -3031,7 +3031,7 @@ const SubmitBtn = ({ formBtn }) => {
 export default SubmitBtn;
 ```
 
-#### Test User
+#### K. Test User
 
 - create test user
 - feel free to use one of the chatGPT options
