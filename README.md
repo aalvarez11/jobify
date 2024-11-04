@@ -2854,7 +2854,7 @@ const Profile = () => {
 export default Profile;
 ```
 
-#### Profile Page - Action
+#### E. Profile Page - Action
 
 - import/export action (App.jsx)
 
@@ -2878,13 +2878,15 @@ export const action = async ({ request }) => {
 };
 ```
 
-#### Update User - Server
+#### F. Update User - Server
 
 ```sh
 npm i multer@1.4.5
 ```
 
 Multer is a popular middleware package for handling multipart/form-data in Node.js web applications. It is commonly used for handling file uploads. Multer simplifies the process of accepting and storing files submitted through HTTP requests by providing an easy-to-use API. It integrates seamlessly with Express.js and allows developers to define upload destinations, file size limits, and other configurations.
+
+Dev note: SHOULD ALREADY BE INSTALLED, check root `package.json` or `package-lock.json`
 
 - create middleware/multerMiddleware.js
 - setup multer
@@ -2931,9 +2933,9 @@ In this case, upload is an instance of the Multer middleware that was created ea
 
 When this middleware is used in an HTTP route handler, it will process the incoming request and extract the file attached to the 'avatar' field. Multer will then save the file according to the specified storage configuration, which includes the destination directory and filename logic defined earlier. The uploaded file can be accessed in the route handler using req.file.
 
-#### Cloudinary - Create Account/Get API Keys
+#### G. Cloudinary - Create Account/Get API Keys
 
-[Cloudinary](https://cloudinary.com/)
+Make an account at [Cloudinary](https://cloudinary.com/), the instructor highly suggests doing so in order to be able to persist images. Without it, any time the server sleeps all images will be lost.
 
 Cloudinary is a cloud-based media management platform that helps businesses store, optimize, and deliver images and videos across the web. It provides developers with an easy way to upload, manipulate, and serve media assets, enabling faster and more efficient delivery of visual content on websites and applications. Cloudinary also offers features like automatic resizing, format conversion, and responsive delivery to ensure optimal user experiences across different devices and network conditions.
 
