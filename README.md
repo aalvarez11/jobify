@@ -2758,15 +2758,15 @@ const Wrapper = styled.article`
 export default Wrapper;
 ```
 
-#### Avatar Image
+### 10. Profile Page
 
-- get two images from pexels
+#### A. Avatar Image
 
-[pexels](https://www.pexels.com/search/person/)
+Before setting up the page, the instructor advises us to get two images, they can be from anywhere, one resource he suggests is [pexels](https://www.pexels.com/search/person/).
 
-#### Setup Public Folder
+#### B. Setup Public Folder
 
-server.js
+ES6 handles `__dirname` differently than other versions, so the instructor tells us to add some additional middleware to `server.js`:
 
 ```js
 import { dirname } from 'path';
@@ -2778,23 +2778,23 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.resolve(__dirname, './public')));
 ```
 
-- http://localhost:5100/imageName
+After installing the middleware, the instructor shows us that after moving the image into the root directory, he can go to the browser and (if the server is running) view it at `http://localhost:5100/imageName`.
 
-#### Profile Page - Initial Setup
+#### C. Profile Page - Initial Setup
 
-- remove jobs,users from DB
-- add avatar property in the user model
-
-models/UserModel.js
+Before continuing, the instructor tells us we'll have to drop the jobs and users tables from our database. This is because we'll have to update the model to add avatar properties as seen in this snippet from `models/UserModel.js`:
 
 ```js
 const UserSchema = new mongoose.Schema({
+  ...
   avatar: String,
   avatarPublicId: String,
 });
 ```
 
-#### Profile Page - Structure
+Dev note: After cleaning the databases, the instructor creates a user. Before doing that, also restart the server just in case!
+
+#### D. Profile Page - Structure
 
 pages/Profile.jsx
 
