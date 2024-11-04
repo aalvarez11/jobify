@@ -3134,9 +3134,9 @@ export const checkForTestUser = (req, res, next) => {
 
 - add to updateUser, createJob, updateJob, deleteJob
 
-#### Mock Data
+##### 3. Mock Data
 
-[Mockaroo ](https://www.mockaroo.com/)
+The demo user has nothing to demo, so the next step is to populate the database with dummy data. The instructor tells us about online tool [Mockaroo ](https://www.mockaroo.com/) that can create csv files or json files with generated data according to your provided field names and specified types (company name, job title, city, datetime, custom).
 
 ```json
 {
@@ -3149,9 +3149,9 @@ export const checkForTestUser = (req, res, next) => {
 }
 ```
 
-- rename and save json in utils
+rename and save the json as `mockData.json` and move the file into `Jobify/utils`.
 
-#### Populate DB
+##### 4. Populate DB
 
 - create populate.js
 - setup for test user and admin
