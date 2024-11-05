@@ -3184,7 +3184,9 @@ try {
 }
 ```
 
-## 11. Stats - Setup
+### 11. Stats Page
+
+#### A. Stats - Setup
 
 - create controller
 - setup route and preview with thunder client
@@ -3223,7 +3225,7 @@ export const showStats = async (req, res) => {
 };
 ```
 
-### A. Stats - Complete Server Functionality
+#### B. Stats - Complete Server Functionality
 
 [MongoDB Docs](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/)
 
@@ -3279,7 +3281,7 @@ export const showStats = async (req, res) => {
 };
 ```
 
-#### 1. Commentary
+##### 1. Commentary
 
 ```js
 let stats = await Job.aggregate([
@@ -3320,7 +3322,7 @@ let monthlyApplications = await Job.aggregate([ ... ]); This line indicates that
 
 So, monthlyApplications will be an array with up to 6 elements, each representing the number of jobs created by the user in a specific month and year. The array will be sorted by year and month, starting with the most recent.
 
-### B. Stats - Front-End Setup
+#### C. Stats - Front-End Setup
 
 - create four components
 - StatsContainer and ChartsContainer (import/export)
@@ -3355,7 +3357,7 @@ const Stats = () => {
 export default Stats;
 ```
 
-### C. Stats Container
+#### D. Stats Container
 
 ```js
 import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from 'react-icons/fa';
@@ -3396,7 +3398,7 @@ const StatsContainer = ({ defaultStats }) => {
 export default StatsContainer;
 ```
 
-### D. ChartsContainer
+#### E. ChartsContainer
 
 ```js
 import { useState } from 'react';
@@ -3422,7 +3424,7 @@ const ChartsContainer = ({ data }) => {
 export default ChartsContainer;
 ```
 
-### E. Charts
+#### F. Charts
 
 [recharts](https://recharts.org/en-US/)
 
@@ -3432,7 +3434,7 @@ Dev note: should be preinstalled, check it the package json in the client
 npm i recharts@2.5.0
 ```
 
-#### 1. Area Chart
+##### 1. Area Chart
 
 ```js
 import {
@@ -3462,7 +3464,7 @@ const AreaChartComponent = ({ data }) => {
 export default AreaChartComponent;
 ```
 
-#### 2. Bar Chart
+##### 2. Bar Chart
 
 ```js
 import {
@@ -3492,7 +3494,7 @@ const BarChartComponent = ({ data }) => {
 export default BarChartComponent;
 ```
 
-#### 3. Charts CSS (optional)
+##### 3. Charts CSS (optional)
 
 wrappers/ChartsContainer.js
 
@@ -3519,7 +3521,9 @@ const Wrapper = styled.section`
 export default Wrapper;
 ```
 
-#### Get All Jobs - Server
+### 12. All Jobs Page
+
+#### A. All Jobs Page - Server
 
 jobController.js
 
