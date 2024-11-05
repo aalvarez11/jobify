@@ -3190,6 +3190,8 @@ try {
 - setup route and preview with thunder client
 - install/setup dayjs on the server
 
+dev note: ensure the cookie is correct in the Thunder Client/Flashpost request headers.
+
 jobController.js
 
 ```js
@@ -3221,7 +3223,7 @@ export const showStats = async (req, res) => {
 };
 ```
 
-#### Stats - Complete Server Functionality
+### A. Stats - Complete Server Functionality
 
 [MongoDB Docs](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/)
 
@@ -3277,7 +3279,7 @@ export const showStats = async (req, res) => {
 };
 ```
 
-#### Commentary
+#### 1. Commentary
 
 ```js
 let stats = await Job.aggregate([
@@ -3318,7 +3320,7 @@ let monthlyApplications = await Job.aggregate([ ... ]); This line indicates that
 
 So, monthlyApplications will be an array with up to 6 elements, each representing the number of jobs created by the user in a specific month and year. The array will be sorted by year and month, starting with the most recent.
 
-#### Stats - Front-End Setup
+### B. Stats - Front-End Setup
 
 - create four components
 - StatsContainer and ChartsContainer (import/export)
