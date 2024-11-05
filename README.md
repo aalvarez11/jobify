@@ -3426,13 +3426,13 @@ export default ChartsContainer;
 
 [recharts](https://recharts.org/en-US/)
 
-- in the client
+Dev note: should be preinstalled, check it the package json in the client
 
 ```sh
 npm i recharts@2.5.0
 ```
 
-#### Area Chart
+#### 1. Area Chart
 
 ```js
 import {
@@ -3462,7 +3462,7 @@ const AreaChartComponent = ({ data }) => {
 export default AreaChartComponent;
 ```
 
-#### Bar Chart
+#### 2. Bar Chart
 
 ```js
 import {
@@ -3492,7 +3492,7 @@ const BarChartComponent = ({ data }) => {
 export default BarChartComponent;
 ```
 
-#### Charts CSS (optional)
+#### 3. Charts CSS (optional)
 
 wrappers/ChartsContainer.js
 
