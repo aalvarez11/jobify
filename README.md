@@ -3396,7 +3396,7 @@ const StatsContainer = ({ defaultStats }) => {
 export default StatsContainer;
 ```
 
-#### ChartsContainer
+### D. ChartsContainer
 
 ```js
 import { useState } from 'react';
@@ -3422,7 +3422,7 @@ const ChartsContainer = ({ data }) => {
 export default ChartsContainer;
 ```
 
-#### Charts
+### E. Charts
 
 [recharts](https://recharts.org/en-US/)
 
