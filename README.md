@@ -3153,8 +3153,7 @@ rename and save the json as `mockData.json` and move the file into `Jobify/utils
 
 ##### 4. Populate DB
 
-- create populate.js
-- setup for test user and admin
+Now that we have a file full of jobs we can populate our database with, the instructor begins writing a script that will use the file and do so, named `populate.js`. Initially the script is set up with our test user, which in previous steps all shared the email `test@test.com` for ease of setup. When the script is ready, we have to stop the app from running, if it is, and in the terminal run command `node populate`. If the console shows the success message, then everything worked out and you can check either the running app or log into Atlas to make sure the test user has the 100 job entries to sample. The instructor also checks the validation to make sure demo users can't modify or delete any of the job entries. Now that a test user can demo entries, it would also be a good idea to make sure the admin has some dummy jobs as well, but instead of making a whole new set of dummy data, we'll reuse the file and switch the user variable from seeking email `test@test.com` to seeking our admin's email, saving the file, then running `node populate` again.
 
 ```js
 import { readFile } from 'fs/promises';
@@ -3185,7 +3184,7 @@ try {
 }
 ```
 
-#### Stats - Setup
+## 11. Stats - Setup
 
 - create controller
 - setup route and thunder client
