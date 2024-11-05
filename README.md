@@ -3355,7 +3355,7 @@ const Stats = () => {
 export default Stats;
 ```
 
-#### Stats Container
+### C. Stats Container
 
 ```js
 import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from 'react-icons/fa';
