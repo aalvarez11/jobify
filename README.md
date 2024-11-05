@@ -3187,7 +3187,7 @@ try {
 ## 11. Stats - Setup
 
 - create controller
-- setup route and thunder client
+- setup route and preview with thunder client
 - install/setup dayjs on the server
 
 jobController.js
