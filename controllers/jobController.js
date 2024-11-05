@@ -26,14 +26,13 @@ export const getAllJobs = async (req, res) => {
     queryObject.jobType = jobType;
   }
 
-  //
+  // sorting for job search
   const sortOptions = {
     newest: '-createdAt',
     oldest: 'createdAt',
     'a-z': 'position',
     'z-a': '-position',
   };
-
   const sortKey = sortOptions[sort] || sortOptions.newest;
 
   const jobs = await Job.find(queryObject).sort(sortKey);
