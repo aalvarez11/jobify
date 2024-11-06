@@ -3794,7 +3794,7 @@ const debounce = (onChange) => {
 />;
 ```
 
-#### Pagination - Setup
+#### F. Pagination - Setup
 
 - create PageBtnContainer
 
@@ -3835,7 +3835,7 @@ const JobsContainer = () => {
 export default JobsContainer;
 ```
 
-#### Basic PageBtnContainer
+#### G. Basic PageBtnContainer
 
 ```js
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
