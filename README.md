@@ -3899,7 +3899,7 @@ const PageBtnContainer = () => {
 export default PageBtnContainer;
 ```
 
-#### Complex - PageBtnContainer
+#### H. Complex - PageBtnContainer
 
 ```js
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
@@ -4018,7 +4018,7 @@ const PageBtnContainer = () => {
 export default PageBtnContainer;
 ```
 
-#### PageBtnContainer CSS (optional)
+#### I. PageBtnContainer CSS (optional)
 
 wrappers/PageBtnContainer.js
 
