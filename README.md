@@ -3694,7 +3694,7 @@ Object.fromEntries(): This static method creates an object from an array of key-
 
 Putting it all together, the code retrieves the URL from the request.url property, extracts the search parameters using the searchParams property, converts them into an array of key-value pairs using entries(), and finally uses Object.fromEntries() to create an object with the parameter names as keys and their corresponding values. The resulting object, params, contains all the search parameters from the URL.
 
-#### Submit Form Programmatically
+#### D. Submit Form Programmatically
 
 - setup default values from the context
 - remove SubmitBtn
@@ -3767,7 +3767,7 @@ const SearchContainer = () => {
 export default SearchContainer;
 ```
 
-#### Debounce
+#### E. Debounce
 
 [JS Nuggets - Debounce](https://youtu.be/tYx6pXdvt1s)
 
