@@ -4159,13 +4159,13 @@ To test if the new configurations are fine, particularly the build command, remo
 
 #### B. Test in Production
 
-- change build command on render
+Now to check in production, change build command on render to the new script:
 
 ```sh
 npm run setup-production-app
 ```
 
-- push up to github
+This will make Render rebuild the app again in production. Now any changes pushed to github will now be reflected in production.
 
 #### Upload Image As Buffer
 
