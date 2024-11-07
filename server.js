@@ -42,9 +42,9 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Examples for express requests
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello World');
+// });
 
 // test route for proxy
 app.get('/api/v1/test', (req, res) => {
@@ -55,6 +55,11 @@ app.get('/api/v1/test', (req, res) => {
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/auth', authRouter);
+
+// point to app frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+});
 
 // Not Found middleware that should catch 404 for all routes non-existing routes
 app.use('*', (req, res) => {
