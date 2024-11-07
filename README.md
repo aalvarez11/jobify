@@ -4104,12 +4104,9 @@ dev note: for personal reference I used the following user info in dev:
 
 In the terminal, navigate to the client with `cd client` then build the project with `npm run build`
 
-- copy/paste all the files/folders
+Copy/paste all the files &folders from client/dist to server(root)/public.
 
-  - from client/dist
-  - to server(root)/public
-
-- in server.js point to index.html
+In `server.js`, between the routers and the notFound middleware route, add a route pointing to `index.html`:
 
 ```js
 app.get('*', (req, res) => {
