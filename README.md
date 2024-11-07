@@ -4135,10 +4135,7 @@ Now just wait for message "Your service is live 🎉" and test it out!
 
 ### 3. Build Front-End on Render
 
-- add script
-- change path
-
-package.json
+With the current settings, any updates to the project locally will need the added steps of rebuilding and moving the dist files to root, which also mess with the Render deployment. To get around this issue, we need to reconfigure some of the settings locally, test them out, and then push them to the git repo once we know they're fine. To start,add the following script to `package.json`:
 
 ```js
  "scripts": {
@@ -4146,7 +4143,7 @@ package.json
   },
 ```
 
-server.js
+Then, change the paths to the index from `/public` to the build directory`/client/dist` in `server.js`:
 
 ```js
 app.use(express.static(path.resolve(__dirname, './client/dist')));
@@ -4156,13 +4153,11 @@ app.get('*', (req, res) => {
 });
 ```
 
-#### Test Locally
+#### A. Test Locally
 
-- remove client/dist and client/node_modules
-- remove node_modules and package-lock.json (optional)
-- run "npm run setup-production-app", followed by "node server"
+To test if the new configurations are fine, particularly the build command, remove directories `client/dist` and `client/node_modules`, then remove the root `node_modules` directory. The instructor mentions that removing the root `package-lock.json` is optional, but they remove it as well out of personal preference. Now comes the big step; execute the terminal command `npm run setup-production-app` to rebuild the application, then after building run command `node server`. Now try out the app on http://localhost:5100 to see if everything looks fine. The instructor went into the test user to check out the views.
 
-#### Test in Production
+#### B. Test in Production
 
 - change build command on render
 

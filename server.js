@@ -33,7 +33,7 @@ cloudinary.config({
 
 // Public file access
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.resolve(__dirname, './public')));
+app.use(express.static(path.resolve(__dirname, './client/dist')));
 
 // Activate cookie parser
 app.use(cookieParser());
@@ -58,7 +58,7 @@ app.use('/api/v1/auth', authRouter);
 
 // point to app frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+  res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
 });
 
 // Not Found middleware that should catch 404 for all routes non-existing routes
