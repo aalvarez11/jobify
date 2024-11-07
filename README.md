@@ -4084,14 +4084,25 @@ cursor:pointer;
 export default Wrapper;
 ```
 
-#### Local Build
+## Part 4 - Deployment
 
-- remove default values from inputs in Register and Login
-- navigate to client and build front-end
+### 1. Local Build
 
-```sh
-cd client && npm run build
+To prepare for deployment, first remove all defaultValue properties from inputs in both `Register.jsx` and `Login.jsx`
+
+dev note: for personal reference I used the following user info in dev:
+
+```json
+{
+  "name": "Alice",
+  "lastName": "P",
+  "email": "alicep@gmail.com",
+  "password": "secret123",
+  "location": "earth"
+}
 ```
+
+In the terminal, navigate to the client with `cd client` then build the project with `npm run build`
 
 - copy/paste all the files/folders
 
@@ -4106,7 +4117,7 @@ app.get('*', (req, res) => {
 });
 ```
 
-#### Deploy On Render
+### 2. Deploy On Render
 
 [Render](https://render.com/)
 
