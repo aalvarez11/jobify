@@ -4118,10 +4118,22 @@ app.get('*', (req, res) => {
 
 [Render](https://render.com/)
 
-- sign up of for account
-- create git repository
+Sign up of for a Render account, the instructor recommends signing up via github, as the repository will be used for deployment. (Create a git repository, if there isn't one, for the project.) In Render, select `New Web Service` and select/add the project repo. The following object has the key values to look out for when making the new service:
 
-#### Build Front-End on Render
+```json
+{
+  "branch": "main",
+  "region": "whichever is closest: Oregon, Ohio, etc.",
+  "Runtime/Language": "Node",
+  "build command": "npm install",
+  "start command": "node server",
+  "advanced->add secret file": "copy and paste the values from your .env into a Render-local .env file"
+}
+```
+
+Now just wait for message "Your service is live 🎉" and test it out!
+
+### 3. Build Front-End on Render
 
 - add script
 - change path
