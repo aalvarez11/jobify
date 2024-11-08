@@ -4256,13 +4256,13 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
 };
 ```
 
-#### React Query
+### 6. React Query
 
 React Query is a powerful library that simplifies data fetching, caching, and synchronization in React applications. It provides a declarative and intuitive way to manage remote data by abstracting away the complex logic of fetching and caching data from APIs. React Query offers features like automatic background data refetching, optimistic updates, pagination support, and more, making it easier to build performant and responsive applications that rely on fetching and manipulating data.
 
 [React Query Docs](https://tanstack.com/query/v4/docs/react/overview)
 
-- in the client
+If the `@tanstack` package doesn't appear in the client `package.json` install in the client directory:
 
 ```sh
 npm i @tanstack/react-query@4.29.5 @tanstack/react-query-devtools@4.29.6
