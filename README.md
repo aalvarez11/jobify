@@ -4167,7 +4167,7 @@ npm run setup-production-app
 
 This will make Render rebuild the app again in production. Now any changes pushed to github will now be reflected in production.
 
-#### C. Upload Image As Buffer
+### 4. Upload Image As Buffer
 
 Due to Render not having image storage/persistence in the free plan, we will need another way to reach cloudinary. As an aside, the instructor tells us to remove the public folder in root, since we're not going to use that anymore as an intermediate step.
 
@@ -4218,9 +4218,10 @@ export const updateUser = async (req, res) => {
 };
 ```
 
-#### Setup Global Loading
+### 5. Setup Global Loading
 
-- create loading component (import/export)
+Render has a bit of a tick when rendering, so we're going to create a loading component to let the user know that a page is currently rendering.
+
 - check for loading in DashboardLayout page
 
 components/Loading.jsx
