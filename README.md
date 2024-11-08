@@ -4499,7 +4499,7 @@ const Dashboard = ({ prefersDarkMode, queryClient }) => {
 };
 ```
 
-#### Invalidate Queries
+### 10. Invalidate Queries
 
 Unfortunately, users remain in the cache even if you try logging into a different account. This needs a fix to invalidate queries in three places.
 
@@ -4509,16 +4509,17 @@ We'll start at `Login.jsx`
 export const action =
   (queryClient) =>
   async ({ request }) => {
+    // ^^^ don't forget to turn the action into a function that returns function
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
       await axios.post('/api/v1/auth/login', data);
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(); // invalidate right here
       toast.success('Login successful');
-      return redirect('/dashboard');
+      return redirect('/dashboard'); // add a redirect return
     } catch (error) {
       toast.error(error.response.data.msg);
-      return error;
+      return error; // also move the return
     }
   };
 ```
@@ -4529,7 +4530,7 @@ DashboardLayout.jsx
 const logoutUser = async () => {
   navigate('/');
   await customFetch.get('/auth/logout');
-  queryClient.invalidateQueries();
+  queryClient.invalidateQueries(); // invalidate right here
   toast.success('Logging out...');
 };
 ```
@@ -4540,6 +4541,7 @@ Profile.jsx
 export const action =
   (queryClient) =>
   async ({ request }) => {
+    // ^^^ don't forget to turn the action into a function that returns function
     const formData = await request.formData();
     const file = formData.get('avatar');
     if (file && file.size > 500000) {
@@ -4548,7 +4550,7 @@ export const action =
     }
     try {
       await customFetch.patch('/users/update-user', formData);
-      queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries(['user']); // invalidate right here
       toast.success('Profile updated successfully');
       return redirect('/dashboard');
     } catch (error) {
@@ -4558,7 +4560,7 @@ export const action =
   };
 ```
 
-#### All Jobs Query
+### 11. All Jobs Query
 
 AllJobs.jsx
 
