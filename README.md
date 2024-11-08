@@ -4167,9 +4167,9 @@ npm run setup-production-app
 
 This will make Render rebuild the app again in production. Now any changes pushed to github will now be reflected in production.
 
-#### Upload Image As Buffer
+#### C. Upload Image As Buffer
 
-- remove public folder
+Due to Render not having image storage/persistence in the free plan, we will need another way to reach cloudinary. As an aside, the instructor tells us to remove the public folder in root, since we're not going to use that anymore as an intermediate step.
 
 ```sh
 npm i datauri@4.1.0
