@@ -4619,7 +4619,7 @@ export default AllJobs;
 export const useAllJobsContext = () => useContext(AllJobsContext);
 ```
 
-#### Invalidate Jobs
+### 12. Invalidate Jobs
 
 AddJob.jsx
 
@@ -4678,7 +4678,7 @@ export const action =
   };
 ```
 
-#### Edit Job Loader
+### 13. Edit Job Loader
 
 ```js
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
@@ -4770,7 +4770,7 @@ const EditJob = () => {
 export default EditJob;
 ```
 
-#### Axios Interceptors
+### 14. Axios Interceptors
 
 DashboardLayout.jsx
 
@@ -4808,7 +4808,7 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
 
 ```
 
-#### Security
+### 15. Security
 
 ```sh
 npm install helmet express-mongo-sanitize express-rate-limit
