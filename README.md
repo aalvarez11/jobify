@@ -4810,6 +4810,8 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
 
 ### 15. Security
 
+The instructor shares with us some packages to help make the app more secure. They are three in total: helmet, express mongo sanitize, and express rate limit. Check the root `package.json` to see if they are already installed, if not run the following command:
+
 ```sh
 npm install helmet express-mongo-sanitize express-rate-limit
 

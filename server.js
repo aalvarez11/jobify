@@ -5,6 +5,8 @@ import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import jobRouter from './routes/jobRouter.js';
@@ -41,15 +43,9 @@ app.use(cookieParser());
 // Enables Json
 app.use(express.json());
 
-// Examples for express requests
-// app.get('/', (req, res) => {
-//   res.send('Hello World');
-// });
-
-// test route for proxy
-app.get('/api/v1/test', (req, res) => {
-  res.json({ msg: 'test route' });
-});
+// Enable helmet and mongo sanitize
+app.use(helmet());
+app.use(mongoSanitize());
 
 // routers
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
