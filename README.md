@@ -4336,7 +4336,7 @@ App.jsx
 },
 ```
 
-#### First Query
+### 8. First Query
 
 - navigate to stats
 
@@ -4389,7 +4389,7 @@ queryFn: () => customFetch.get('/jobs/stats'),: The queryFn property specifies t
 
 customFetch.get('/jobs/stats'): This line is making an HTTP GET request to the /jobs/stats endpoint, which is the API route that provides the job statistics data.
 
-#### Get Stats with React Query
+#### A. Get Stats with React Query
 
 ```js
 const statsQuery = {
@@ -4424,7 +4424,7 @@ const Stats = () => {
 export default Stats;
 ```
 
-#### React Query in Stats Loader
+#### B. React Query in Stats Loader
 
 App.jsx
 
