@@ -4292,7 +4292,7 @@ const App = () => {
 };
 ```
 
-#### Page Error Element
+### 7. Page Error Element
 
 - create components/ErrorElement
 
