@@ -4473,7 +4473,7 @@ const Stats = () => {
 export default Stats;
 ```
 
-#### React Query for Current User
+### 9. React Query for Current User
 
 DashboardLayout.jsx
 
@@ -4501,7 +4501,9 @@ const Dashboard = ({ prefersDarkMode, queryClient }) => {
 
 #### Invalidate Queries
 
-Login.jsx
+Unfortunately, users remain in the cache even if you try logging into a different account. This needs a fix to invalidate queries in three places.
+
+We'll start at `Login.jsx`
 
 ```js
 export const action =
